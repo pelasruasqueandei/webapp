@@ -78,7 +78,7 @@ public class AlertasJPA implements AlertasDao
 		{
 			Alerta primeiro = new Alerta();
 			primeiro.setMensagem(Mensagem.getInfo("Bem vindo ao seu gerenciador de pontos turísticos!"));
-			primeiro.setData(FMT.getHoje());
+			primeiro.setData(FMT.getAgora());
 			primeiro.setVisto(false);
 			
 			manager.persist(primeiro);

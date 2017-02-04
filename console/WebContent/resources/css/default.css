@@ -7,6 +7,10 @@ body{
 .nav-padded{
 	padding: 100px 25px;
 }
+table.center-align, th, td{
+	text-align: center !important;
+	vertical-align: middle !important;
+}
 social, a.social:hover{
 	color: #0B62A4 !important;
 }

@@ -38,8 +38,7 @@ public class AlertasController
 	private static String mensagem = null;
 	
 	@RequestMapping("listaAlertas")
-	public String listaAlertas(Model model, HttpSession session)
-	{
+	public String listaAlertas(Model model, HttpSession session) {
 		Perfil usuario = (Perfil)session.getAttribute("usuario");
 		
 		int qtdAlertas = alertasDao.conta();
@@ -50,7 +49,8 @@ public class AlertasController
 		model.addAttribute("qtdAlertas",qtdAlertas);
 		model.addAttribute("usuario",usuario);
 		
-		HtmlTableBuilder builder = new HtmlTableBuilder(null, null, "Tabela de alertas do sistema.", "Alertas do Sistema", beanList);
+		HtmlTableBuilder builder = new HtmlTableBuilder("center-align", null, "Tabela de alertas do sistema.", "Alertas do Sistema", beanList);
+		builder.setUpdateAction(true);
 		if(beanList != null && beanList.size() > 0)
 			model.addAttribute("listaAlertas", builder.getTableOrderBy("1", "0"));
 		
@@ -61,4 +61,32 @@ public class AlertasController
 		
 		return "alertas/listaAlertas";
 	}
+	
+	@RequestMapping("atualizarAlerta")
+	public String atualizarAlerta(Long id, Model model, HttpSession session) {
+		mensagem = alertasDao.modificaVisibilidade(id);
+		
+		Perfil usuario = (Perfil)session.getAttribute("usuario");
+		
+		int qtdAlertas = alertasDao.conta();
+		List<Alerta> listaAlertas = alertasDao.lista();
+		ArrayList<Alerta> beanList = new ArrayList<Alerta>();
+		beanList.addAll(listaAlertas);
+		
+		model.addAttribute("qtdAlertas",qtdAlertas);
+		model.addAttribute("usuario",usuario);
+		
+		HtmlTableBuilder builder = new HtmlTableBuilder("center-align", null, "Tabela de alertas do sistema.", "Alertas do Sistema", beanList);
+		builder.setUpdateAction(true);
+		if(beanList != null && beanList.size() > 0)
+			model.addAttribute("listaAlertas", builder.getTableOrderBy("1", "0"));
+		
+		if(mensagem != null) {
+			model.addAttribute("mensagem",mensagem);
+			mensagem = null;
+		}
+		
+		return "alertas/listaAlertas";
+	}
+	
 }
