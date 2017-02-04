@@ -465,6 +465,9 @@ public class HtmlTableBuilder
 				
 					});
 			HtmlTableBuilder builder = new HtmlTableBuilder(classe, id, sumario, titulo, beanList);
+			builder.setDeleteAction(deleteAction);
+			builder.setDetailAction(detailAction);
+			builder.setUpdateAction(updateAction);
 			return builder.getTable();
 		}
 		else if(ordem == 1)
@@ -527,6 +530,9 @@ public class HtmlTableBuilder
 				
 					});
 			HtmlTableBuilder builder = new HtmlTableBuilder(classe, id, sumario, titulo, beanList);
+			builder.setDeleteAction(deleteAction);
+			builder.setDetailAction(detailAction);
+			builder.setUpdateAction(updateAction);
 			return builder.getTable();
 		}
 		else
