@@ -24,11 +24,7 @@ import br.com.compliancesoftware.Model.Params.DateFormat;
  * O objeto a ser listado deve, por padrão, ser um POJO e possuir, obrigatoriamente, um atributo "id" com seus respectivos métodos getId e setId.
  * 
  * PS.: As actions desta classe obedencem ao framework Bootstrap, de forma que deve ter o mesmo instalado no front-end, já no back-end, você deve ter os devidos mapeamentos
- * para as requisições que podem ser feitas (encorajando o uso de Ajax):
- * 
- * atualizar<nome_da_classe>?id=<id_do_objeto> (Exemplo: atualizarCliente?id=1) --> @RequestMapping("atualizarCliente")
- * detalhar<nome_da_classe>?id=<id_do_objeto> (Exemplo: detalharCliente?id=2) --> @RequestMapping("detalharCliente")
- * remover<nome_da_classe>?id=<id_do_objeto> (Exemplo: removerCliente?id=3) --> @RequestMapping("removerCliente")
+ * para as requisições que podem ser feitas (encorajando o uso de Ajax)
  * 
  * @author Douglas Fernandes <douglasf.filho@gmail.com>
  *
@@ -309,9 +305,9 @@ public class HtmlTableBuilder
 						table += "<td role=\"gridcell\">";
 						
 						if(updateAction)
-							table += "<br><a href=\"atualizar"+beanName+"?id="+linha.getId()+"\">Atualizar</a>";
+							table += "<br><a onclick=\"atualizar"+beanName+"("+linha.getId()+")\">Atualizar</a>";
 						if(detailAction)
-							table += "<br><a href=\"detalhar"+beanName+"?id="+linha.getId()+"\">Detalhar</a>";
+							table += "<br><a onclick=\"detalhar"+beanName+"("+linha.getId()+")\">Detalhar</a>";
 						if(deleteAction)
 						{
 							table += "<br><a href=\"#\" data-toggle=\"modal\" data-target=\"#myModal"+linha.getId()+"\">Remover</a>"+
@@ -326,7 +322,7 @@ public class HtmlTableBuilder
 			  						 				"<p>Deseja realmente remover este item?</p>"+
 			  						 			"</div>"+
 			  						 			"<div class=\"modal-footer\">"+
-			  						 				"<a href=\"remover"+beanName+"?id="+linha.getId()+"\"><button class=\"btn btn-info\">Sim</button></a>"+
+			  						 				"<a><button onclick=\"remover"+beanName+"("+linha.getId()+")\" class=\"btn btn-info\">Sim</button></a>"+
 			  						 			"</div>"+
 			  						 		"</div>"+
 			  						 	"</div>"+
