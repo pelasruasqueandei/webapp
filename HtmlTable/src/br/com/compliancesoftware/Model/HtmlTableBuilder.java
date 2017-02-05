@@ -305,9 +305,9 @@ public class HtmlTableBuilder
 						table += "<td role=\"gridcell\">";
 						
 						if(updateAction)
-							table += "<br><a onclick=\"atualizar"+beanName+"("+linha.getId()+")\">Atualizar</a>";
+							table += "<br><a><button onclick=\"atualizar"+beanName+"("+linha.getId()+")\" class=\"btn btn-info\">Atualizar</button></a>";
 						if(detailAction)
-							table += "<br><a onclick=\"detalhar"+beanName+"("+linha.getId()+")\">Detalhar</a>";
+							table += "<br><a><button onclick=\"detalhar"+beanName+"("+linha.getId()+")\" class=\"btn btn-info\">Detalhar</button></a>";
 						if(deleteAction)
 						{
 							table += "<br><a href=\"#\" data-toggle=\"modal\" data-target=\"#myModal"+linha.getId()+"\">Remover</a>"+
@@ -375,8 +375,35 @@ public class HtmlTableBuilder
 				"	$.get(\"get"+beanList.get(0).getClass().getSimpleName()+"TableOrderBy?field=\"+id,function(data){  "+
 				"		$(\"div#tablediv_id\").parent().html(data);            "+
 				"	});                                             "+
-				"});                                                "+
-				"</script>";
+				"});                                                ";
+				
+				if(updateAction) {
+					script += ""+
+					"<script type=\"text/javascript\">"+
+		    			"function atualizar"+beanList.get(0).getClass().getSimpleName()+"(id) {"+
+		    				"var url = \"atualizar"+beanList.get(0).getClass().getSimpleName()+"\";"+
+		    				"var params = {'id':id};"+
+		    				"$.post(url,params,function(resposta){"+
+		    					"$(\"div#tablediv_id\").parent().html(resposta);"+
+		    				"});"+
+		    			"}"+
+		    		"</script>";
+				}
+				
+				if(deleteAction) {
+					script += ""+
+					"<script type=\"text/javascript\">"+
+		    			"function remover"+beanList.get(0).getClass().getSimpleName()+"(id) {"+
+		    				"var url = \"remover"+beanList.get(0).getClass().getSimpleName()+"\";"+
+		    				"var params = {'id':id};"+
+		    				"$.post(url,params,function(resposta){"+
+		    					"$(\"div#tablediv_id\").parent().html(resposta);"+
+		    				"});"+
+		    			"}"+
+		    		"</script>";
+				}
+		
+				script += "</script>";
 		
 		table += script;
 		
