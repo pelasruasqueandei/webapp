@@ -590,6 +590,75 @@ public class HtmlTableBuilder
 		}
 	}
 	
+	private String convertToUnicode(String str) {
+		String especiais = "´~^áéíóúÁÉÍÓÚàèìòùÀÈÌÒÙãõÃÕçÇâêîôûÂÊÎÔÛªº";
+		String[] cEspeciais = new String[especiais.length()];
+		cEspeciais[0] = "&cute";
+		cEspeciais[1] = "&tilde";
+		cEspeciais[2] = "&circ";
+		
+		cEspeciais[3] = "&aacute";
+		cEspeciais[4] = "&eacute";
+		cEspeciais[5] = "&iacute";
+		cEspeciais[6] = "&oacute";
+		cEspeciais[7] = "&uacute";
+		cEspeciais[8] = "&Aacute";
+		cEspeciais[9] = "&Eacute";
+		cEspeciais[10] = "&Iacute";
+		cEspeciais[11] = "&Oacute";
+		cEspeciais[12] = "&Uacute";
+		
+		cEspeciais[13] = "&agrave";
+		cEspeciais[14] = "&egrave";
+		cEspeciais[15] = "&igrave";
+		cEspeciais[16] = "&ograve";
+		cEspeciais[17] = "&ugrave";
+		cEspeciais[18] = "&Agrave";
+		cEspeciais[19] = "&Egrave";
+		cEspeciais[20] = "&Igrave";
+		cEspeciais[21] = "&Ograve";
+		cEspeciais[22] = "&Ugrave";
+		
+		cEspeciais[23] = "&atilde";
+		cEspeciais[24] = "&otilde";
+		cEspeciais[25] = "&Atilde";
+		cEspeciais[26] = "&Otilde";
+		
+		cEspeciais[27] = "&ccedil";
+		cEspeciais[28] = "&Ccedil";
+		
+		cEspeciais[29] = "&acirc";
+		cEspeciais[30] = "&ecirc";
+		cEspeciais[31] = "&icirc";
+		cEspeciais[32] = "&ocirc";
+		cEspeciais[33] = "&ucirc";
+		cEspeciais[34] = "&Acirc";
+		cEspeciais[35] = "&Ecirc";
+		cEspeciais[36] = "&Icirc";
+		cEspeciais[37] = "&Ocirc";
+		cEspeciais[38] = "&Ucirc";
+		
+		cEspeciais[39] = "&ordf";
+		cEspeciais[40] = "&ordm";
+		
+		
+		StringBuffer ostr = new StringBuffer();
+		
+		for(char ch : str.toCharArray()){
+			if(especiais.contains(""+ch)){
+				String conversao = cEspeciais[especiais.indexOf(ch)];
+				ostr.append(conversao);
+			}
+			else
+				ostr.append(ch);
+		}
+		
+		String converted = new String(ostr);
+		System.out.println("Convertido de: "+str);
+		System.out.println("Convertido para: "+converted);
+		return converted;
+	}
+	
 	/**
 	 * Usado para poupar código em back-end para escrever a tabela na response quando feitas as requisições de actions via Ajax.
 	 * 
@@ -601,9 +670,7 @@ public class HtmlTableBuilder
 	{
 		try 
 		{
-			String html = new String(table.getBytes(),"UTF-8");
-			
-			response.setContentType("text/html; charset=UTF-8");
+			String html = convertToUnicode(table);
 			
 			PrintWriter page = response.getWriter();
 			page.print(html);
