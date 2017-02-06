@@ -295,6 +295,21 @@ public class HtmlTableBuilder
 							String cellvalue = String.format("%.2f", cell);
 							table += "<td role=\"gridcell\">"+cellvalue+"</td>";
 						}
+						else if(type.endsWith("String"))
+						{
+							try
+							{
+								String cell = (String)celula;
+								byte[] toConvert = cell.getBytes("UTF-8");
+								String cellvalue = new String(toConvert,"UTF-8");
+								table += "<td role=\"gridcell\">"+cellvalue+"</td>";
+							}
+							catch(Exception e)
+							{
+								e.printStackTrace();
+								table += "<td role=\"gridcell\">"+celula+"</td>";
+							}
+						}
 						else
 							table += "<td role=\"gridcell\">"+celula+"</td>";
 					}
@@ -499,6 +514,7 @@ public class HtmlTableBuilder
 			builder.setDeleteAction(deleteAction);
 			builder.setDetailAction(detailAction);
 			builder.setUpdateAction(updateAction);
+			builder.setParams(params);
 			return builder.getTable();
 		}
 		else if(ordem == 1)
@@ -564,6 +580,7 @@ public class HtmlTableBuilder
 			builder.setDeleteAction(deleteAction);
 			builder.setDetailAction(detailAction);
 			builder.setUpdateAction(updateAction);
+			builder.setParams(params);
 			return builder.getTable();
 		}
 		else
