@@ -379,28 +379,24 @@ public class HtmlTableBuilder
 				
 				if(updateAction) {
 					script += ""+
-					"<script type=\"text/javascript\">"+
-		    			"function atualizar"+beanList.get(0).getClass().getSimpleName()+"(id) {"+
-		    				"var url = \"atualizar"+beanList.get(0).getClass().getSimpleName()+"\";"+
-		    				"var params = {'id':id};"+
-		    				"$.post(url,params,function(resposta){"+
-		    					"$(\"div#tablediv_id\").parent().html(resposta);"+
-		    				"});"+
-		    			"}"+
-		    		"</script>";
+					"function atualizar"+beanList.get(0).getClass().getSimpleName()+"(id) {"+
+		    			"var url = \"atualizar"+beanList.get(0).getClass().getSimpleName()+"\";"+
+		    			"var params = {'id':id};"+
+		    			"$.post(url,params,function(resposta){"+
+		    				"$(\"div#tablediv_id\").parent().html(resposta);"+
+		    			"});"+
+		    		"}";
 				}
 				
 				if(deleteAction) {
 					script += ""+
-					"<script type=\"text/javascript\">"+
-		    			"function remover"+beanList.get(0).getClass().getSimpleName()+"(id) {"+
-		    				"var url = \"remover"+beanList.get(0).getClass().getSimpleName()+"\";"+
-		    				"var params = {'id':id};"+
-		    				"$.post(url,params,function(resposta){"+
-		    					"$(\"div#tablediv_id\").parent().html(resposta);"+
-		    				"});"+
-		    			"}"+
-		    		"</script>";
+					"function remover"+beanList.get(0).getClass().getSimpleName()+"(id) {"+
+		    			"var url = \"remover"+beanList.get(0).getClass().getSimpleName()+"\";"+
+		    			"var params = {'id':id};"+
+		    			"$.post(url,params,function(resposta){"+
+		    				"$(\"div#tablediv_id\").parent().html(resposta);"+
+		    			"});"+
+		    		"}";
 				}
 		
 				script += "</script>";
@@ -422,11 +418,23 @@ public class HtmlTableBuilder
 		int ordem = Integer.parseInt(order);
 		
 		Object model = beanList.get(0);
-		String f1 = model.getClass().getDeclaredFields()[campo].getName();
+		
+		Field[] fields = model.getClass().getDeclaredFields();
+		ArrayList<String> campos = new ArrayList<String>();
+		ArrayList<String> types = new ArrayList<String>();
+		for(Field f : fields){
+			if(f.isAnnotationPresent(HtmlTableAttribute.class)){
+				campos.add(f.getName());
+				types.add(f.getType().getName());
+			}
+		}
+		
+		String f1 = campos.get(campo);
 		String p1 = f1.substring(0, 1).toUpperCase();
 		String p2 = f1.substring(1);
 		final String getter = "get"+p1+p2;
-		final String type = model.getClass().getDeclaredFields()[campo].getType().getName();
+		
+		final String type = types.get(campo);
 		
 		if(ordem == 0)
 		{
@@ -560,6 +568,7 @@ public class HtmlTableBuilder
 		}
 		else
 		{
+			System.out.println("Não ordenou.");
 			return this.getTable();
 		}
 	}
