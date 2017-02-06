@@ -10,7 +10,7 @@
 
 <mtag:favicon/>
 
-<title>WebRegistro - Logs</title>
+<title>Console - Logs</title>
 
 <mtag:cssJsHead/>
 
