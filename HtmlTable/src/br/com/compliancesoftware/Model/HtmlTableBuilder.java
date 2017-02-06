@@ -599,9 +599,12 @@ public class HtmlTableBuilder
 	 */
 	public void writeTable(HttpServletResponse response, String table)
 	{
-		String html = table;
 		try 
 		{
+			String html = new String(table.getBytes(),"UTF-8");
+			
+			response.setContentType("text/html; charset=UTF-8");
+			
 			PrintWriter page = response.getWriter();
 			page.print(html);
 			page.close();
