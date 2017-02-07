@@ -24,6 +24,9 @@ public class AlertasJPA implements AlertasDao
 	@PersistenceContext
 	EntityManager manager;
 	
+	/**
+	 * Cria um alerta no banco de dados.
+	 */
 	@Override
 	public String notifica(Alerta alerta) 
 	{
@@ -31,11 +34,19 @@ public class AlertasJPA implements AlertasDao
 		return Mensagem.getOk("Notificação criada.");
 	}
 
+	/**
+	 * Recupera um alerta do banco de dados usando o campo id.
+	 * @param id
+	 * @return
+	 */
 	private Alerta getAlertaById(long id) {
 		Alerta alerta = manager.find(Alerta.class, id);
 		return alerta;
 	}
 	
+	/**
+	 * Modifica a informação de "foi visto" de um determinado Alarme através de seu id.
+	 */
 	@Override
 	public String modificaVisibilidade(long id) 
 	{
@@ -49,6 +60,9 @@ public class AlertasJPA implements AlertasDao
 			return Mensagem.getErro("Notificação inexistente.");
 	}
 
+	/**
+	 * Lista os alertas do banco de dados.
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Alerta> lista() 
@@ -58,6 +72,9 @@ public class AlertasJPA implements AlertasDao
 		return query.getResultList();
 	}
 	
+	/**
+	 * Conta os alertas não vistos no sistema.
+	 */
 	@Override
 	public int conta()
 	{
@@ -70,6 +87,9 @@ public class AlertasJPA implements AlertasDao
 		return 0;
 	}
 
+	/**
+	 * Auxilia a criação de um primeiro alerta ao iniciar o sistema pela primeira vez
+	 */
 	@Override
 	public void primeiroUso() 
 	{

@@ -24,12 +24,18 @@ public class LogsJPA implements LogsDao
 	@PersistenceContext
 	EntityManager manager;
 	
+	/**
+	 * Cria um novo log no banco de dados.
+	 */
 	@Override
 	public void adiciona(Log log) 
 	{
 		manager.persist(log);
 	}
 
+	/**
+	 * Lista todos os logs do sistema com base na data de inicio e fim (caso nulas, não limita)
+	 */
 	@Override
 	public List<Log> lista(Calendar inicio, Calendar fim) 
 	{

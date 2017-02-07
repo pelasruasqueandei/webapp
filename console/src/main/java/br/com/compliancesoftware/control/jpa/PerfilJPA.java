@@ -27,12 +27,18 @@ public class PerfilJPA implements PerfilDao
 	@PersistenceContext
 	EntityManager manager;
 	
+	/**
+	 * Recupera informações de um determinado perfil através do id dele.
+	 */
 	@Override
 	public Perfil getPerfilPorId(long id) {
 		Perfil perfil = manager.find(Perfil.class, id);
 		return perfil;
 	}
 
+	/**
+	 * Recupera informações de um determinado perfil através do nome dele.
+	 */
 	@Override
 	public Perfil getPerfilPorNome(String nome) {
 		Query query = manager.createQuery("select p from Perfil as p where p.nome = :paramNome");
@@ -45,6 +51,9 @@ public class PerfilJPA implements PerfilDao
 		return null;
 	}
 	
+	/**
+	 * Recupera informações de um determinado perfil através do e-mail dele.
+	 */
 	@Override
 	public Perfil getPerfilPorEmail(String email) {
 		Query query = manager.createQuery("select p from Perfil as p where p.email = :paramEmail");

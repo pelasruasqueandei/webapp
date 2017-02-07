@@ -66,7 +66,7 @@ public class PerfilController
 	}
 	
 	/**
-	 * Atualiza o banco de perfis de usuários.
+	 * Atualiza o perfil.
 	 * @return
 	 */
 	@RequestMapping("atualizaPerfil")

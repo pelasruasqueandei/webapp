@@ -100,6 +100,11 @@ public class AlertasController
 	}
 	
 	private boolean ordemCrescente = true;
+	/**
+	 * Ordena a tabela de acordo com a coluna clicada.
+	 * @param field
+	 * @param response
+	 */
 	@RequestMapping("getAlertaTableOrderBy")
 	public void reordenaTabela(String field, HttpServletResponse response) {
 		ArrayList<Alerta> beanList = new ArrayList<Alerta>();

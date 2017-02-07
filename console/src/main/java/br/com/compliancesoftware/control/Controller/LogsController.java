@@ -73,6 +73,11 @@ public class LogsController {
 	}
 	
 	private boolean ordemCrescente = true;
+	/**
+	 * Método que reordena a tabela de acordo com a coluna clicada.
+	 * @param field
+	 * @param response
+	 */
 	@RequestMapping("getLogTableOrderBy")
 	public void reordenaTabela(String field, HttpServletResponse response) {
 		ArrayList<Log> beanList = new ArrayList<Log>();
