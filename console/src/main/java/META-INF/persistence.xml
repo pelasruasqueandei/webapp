@@ -17,7 +17,8 @@
    <class>br.com.compliancesoftware.model.PontoTuristico</class>
    
    <properties>
-  	<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+  	<!-- property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" /-->
+  	<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
 	<property name="hibernate.show_sql" value="true" />
 	<property name="hibernate.format_sql" value="true" />
 	

@@ -1,3 +1,30 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<img class="center-block" src="<c:url value="/resources/images/logo/WebRegistro-Logo-155x50.png" />" alt="WebRegistro Logo">
+<img id="logoimage" class="center-block" src="<c:url value="/resources/images/logo/Logo-300x100.png" />" alt="Console Logo">
+<script type="text/javascript">
+	$(document).ready(function(){
+		function resize(){
+			var height = 58;
+			var width = 300;
+			
+			var largura = $(window).width();
+			if(largura < 840){
+				$('#logoimage').attr('src','resources/images/logo/Icone-454x454.png');
+				height = 50;
+				width = 50;
+			}
+			else{
+				$('#logoimage').attr('src','resources/images/logo/Logo-300x100.png');
+			}
+			
+			
+			$('#logoimage').height(height);
+			$('#logoimage').width(width);
+		}
+		resize();
+		
+		$( window ).resize(function() {
+			resize();
+		});
+	});
+</script>
