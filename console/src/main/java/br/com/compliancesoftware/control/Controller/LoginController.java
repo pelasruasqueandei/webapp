@@ -55,28 +55,33 @@ public class LoginController
 	@RequestMapping("entrar")
 	public String efetuaLogin(String nome, String senha, HttpSession session)
 	{
-		Perfil perfil = new Perfil();
-		perfil.setSenha(senha);
-		perfil.setNome(nome);
-		
-		HashMap<String,Object> result = perfilDao.login(perfil);
-		perfil = (Perfil)result.get("Perfil");
-		mensagem = (String)result.get("Mensagem");
-		
-		if(Mensagem.contemOk(mensagem)) {
-			session.setAttribute("usuario", perfil);
+		try{
+			Perfil perfil = new Perfil();
+			perfil.setSenha(senha);
+			perfil.setNome(nome);
 			
-			Log log = new Log();
-			log.setAcao(mensagem);
-			log.setData(null);
-			logsDao.adiciona(log);
+			HashMap<String,Object> result = perfilDao.login(perfil);
+			perfil = (Perfil)result.get("Perfil");
+			mensagem = (String)result.get("Mensagem");
 			
-			return "redirect:home";
-		}
-		else {
-			session.invalidate();
-			perfil = null;
-			return "redirect:login";
+			if(Mensagem.contemOk(mensagem)) {
+				session.setAttribute("usuario", perfil);
+				
+				Log log = new Log();
+				log.setAcao(mensagem);
+				log.setData(null);
+				logsDao.adiciona(log);
+				
+				return "redirect:home";
+			}
+			else {
+				session.invalidate();
+				perfil = null;
+				return "redirect:login";
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return "erro/banco";
 		}
 	}
 	
@@ -88,15 +93,20 @@ public class LoginController
 	@RequestMapping("logout")
 	public String logout(HttpSession session)
 	{
-		session.invalidate();
-		mensagem = Mensagem.getInfo("Você saiu do sistema.");
-		
-		Log log = new Log();
-		log.setAcao(mensagem);
-		log.setData(null);
-		logsDao.adiciona(log);
-		
-		return "redirect:login";
+		try{
+			session.invalidate();
+			mensagem = Mensagem.getInfo("Você saiu do sistema.");
+			
+			Log log = new Log();
+			log.setAcao(mensagem);
+			log.setData(null);
+			logsDao.adiciona(log);
+			
+			return "redirect:login";
+		}catch(Exception e){
+			e.printStackTrace();
+			return "erro/banco";
+		}
 	}
 	
 	/**
@@ -106,15 +116,20 @@ public class LoginController
 	@RequestMapping("login")
 	public String login(Model model, HttpSession session)
 	{
-		alertasDao.primeiroUso();
-		perfilDao.primeiroUso();
-		
-		if(mensagem != null) {
-			model.addAttribute("mensagem",mensagem);
-			mensagem = null;
+		try{
+			alertasDao.primeiroUso();
+			perfilDao.primeiroUso();
+			
+			if(mensagem != null) {
+				model.addAttribute("mensagem",mensagem);
+				mensagem = null;
+			}
+			
+			return "login";
+		}catch(Exception e){
+			e.printStackTrace();
+			return "erro/banco";
 		}
-		
-		return "login";
 	}
 	
 }

@@ -47,29 +47,35 @@ public class LogsController {
 	
 	@RequestMapping("listaLogs")
 	public String listaLogs(Model model, HttpSession session) {
-		int qtdAlertas = alertasDao.conta();
-		model.addAttribute("qtdAlertas", qtdAlertas);
-		
-		if(mensagem != null) {
-			model.addAttribute("mensagem", mensagem);
-			mensagem = null;
+		try{
+			int qtdAlertas = alertasDao.conta();
+			model.addAttribute("qtdAlertas", qtdAlertas);
+			
+			if(mensagem != null) {
+				model.addAttribute("mensagem", mensagem);
+				mensagem = null;
+			}
+			
+			Perfil usuario = (Perfil)session.getAttribute("usuario");
+			model.addAttribute("usuario",usuario);
+			
+			listaLogs = logsDao.lista(null, null);
+			ArrayList<Log> beanList = new ArrayList<Log>();
+			beanList.addAll(listaLogs);
+			
+			HtmlTableBuilder builder = new HtmlTableBuilder(null, null, "Tabela de logs do sistema", "Logs do Sistema", beanList);
+			Params params = new Params();
+			params.setFormatoDeData(DateFormat.DMYHM);
+			builder.setParams(params);
+			if(beanList != null && beanList.size() > 0)
+				model.addAttribute("listaLogs",builder.getTable());
+			
+			return "logs/listaLogs";
 		}
-		
-		Perfil usuario = (Perfil)session.getAttribute("usuario");
-		model.addAttribute("usuario",usuario);
-		
-		listaLogs = logsDao.lista(null, null);
-		ArrayList<Log> beanList = new ArrayList<Log>();
-		beanList.addAll(listaLogs);
-		
-		HtmlTableBuilder builder = new HtmlTableBuilder(null, null, "Tabela de logs do sistema", "Logs do Sistema", beanList);
-		Params params = new Params();
-		params.setFormatoDeData(DateFormat.DMYHM);
-		builder.setParams(params);
-		if(beanList != null && beanList.size() > 0)
-			model.addAttribute("listaLogs",builder.getTable());
-		
-		return "logs/listaLogs";
+		catch(Exception e){
+			e.printStackTrace();
+			return "erro/banco";
+		}
 	}
 	
 	private boolean ordemCrescente = true;

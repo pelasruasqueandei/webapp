@@ -44,18 +44,24 @@ public class SystemController
 	@RequestMapping("home")
 	public String home(Model model, HttpSession session)
 	{
-		int qtdAlertas = alertasDao.conta();
-		model.addAttribute("qtdAlertas", qtdAlertas);
-		
-		if(mensagem != null) {
-			model.addAttribute("mensagem", mensagem);
-			mensagem = null;
+		try{
+			int qtdAlertas = alertasDao.conta();
+			model.addAttribute("qtdAlertas", qtdAlertas);
+			
+			if(mensagem != null) {
+				model.addAttribute("mensagem", mensagem);
+				mensagem = null;
+			}
+			
+			Perfil usuario = (Perfil)session.getAttribute("usuario");
+			model.addAttribute("usuario",usuario);
+			
+			return "index";
 		}
-		
-		Perfil usuario = (Perfil)session.getAttribute("usuario");
-		model.addAttribute("usuario",usuario);
-		
-		return "index";
+		catch(Exception e){
+			e.printStackTrace();
+			return "erro/banco";
+		}
 	}
 	
 	/**

@@ -50,30 +50,35 @@ public class AlertasController
 	 */
 	@RequestMapping("listaAlertas")
 	public String listaAlertas(Model model, HttpSession session) {
-		Perfil usuario = (Perfil)session.getAttribute("usuario");
-		
-		int qtdAlertas = alertasDao.conta();
-		listaAlertas = alertasDao.lista();
-		ArrayList<Alerta> beanList = new ArrayList<Alerta>();
-		beanList.addAll(listaAlertas);
-		
-		model.addAttribute("qtdAlertas",qtdAlertas);
-		model.addAttribute("usuario",usuario);
-		
-		HtmlTableBuilder builder = new HtmlTableBuilder("center-align", null, "Tabela de alertas do sistema.", "Alertas do Sistema", beanList);
-		builder.setUpdateAction(true);
-		Params params = new Params();
-		params.setFormatoDeData(DateFormat.DMYHM);
-		builder.setParams(params);
-		if(beanList != null && beanList.size() > 0)
-			model.addAttribute("listaAlertas", builder.getTableOrderBy("1", "0"));
-		
-		if(mensagem != null) {
-			model.addAttribute("mensagem",mensagem);
-			mensagem = null;
+		try{
+			Perfil usuario = (Perfil)session.getAttribute("usuario");
+			
+			int qtdAlertas = alertasDao.conta();
+			listaAlertas = alertasDao.lista();
+			ArrayList<Alerta> beanList = new ArrayList<Alerta>();
+			beanList.addAll(listaAlertas);
+			
+			model.addAttribute("qtdAlertas",qtdAlertas);
+			model.addAttribute("usuario",usuario);
+			
+			HtmlTableBuilder builder = new HtmlTableBuilder("center-align", null, "Tabela de alertas do sistema.", "Alertas do Sistema", beanList);
+			builder.setUpdateAction(true);
+			Params params = new Params();
+			params.setFormatoDeData(DateFormat.DMYHM);
+			builder.setParams(params);
+			if(beanList != null && beanList.size() > 0)
+				model.addAttribute("listaAlertas", builder.getTableOrderBy("1", "0"));
+			
+			if(mensagem != null) {
+				model.addAttribute("mensagem",mensagem);
+				mensagem = null;
+			}
+			
+			return "alertas/listaAlertas";
+		}catch(Exception e){
+			e.printStackTrace();
+			return "erro/banco";
 		}
-		
-		return "alertas/listaAlertas";
 	}
 	
 	/**

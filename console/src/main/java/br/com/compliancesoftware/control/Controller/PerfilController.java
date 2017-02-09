@@ -51,18 +51,23 @@ public class PerfilController
 	 */
 	@RequestMapping("gerenciarPerfil")
 	public String gerenciarPerfil(Model model, HttpSession session) {
-		int qtdAlertas = alertasDao.conta();
-		model.addAttribute("qtdAlertas", qtdAlertas);
-		
-		if(mensagem != null) {
-			model.addAttribute("mensagem", mensagem);
-			mensagem = null;
+		try{
+			int qtdAlertas = alertasDao.conta();
+			model.addAttribute("qtdAlertas", qtdAlertas);
+			
+			if(mensagem != null) {
+				model.addAttribute("mensagem", mensagem);
+				mensagem = null;
+			}
+			
+			Perfil usuario = (Perfil)session.getAttribute("usuario");
+			model.addAttribute("usuario",usuario);
+			
+			return "perfil/gerenciarPerfil";
+		}catch(Exception e){
+			e.printStackTrace();
+			return "erro/banco";
 		}
-		
-		Perfil usuario = (Perfil)session.getAttribute("usuario");
-		model.addAttribute("usuario",usuario);
-		
-		return "perfil/gerenciarPerfil";
 	}
 	
 	/**
@@ -72,41 +77,46 @@ public class PerfilController
 	@RequestMapping("atualizaPerfil")
 	public String atualiza(Perfil perfil, HttpSession session, HttpServletRequest request) throws Exception
 	{
-		Perfil onDB = perfilDao.getPerfilPorId(perfil.getId());
-		perfil.setFoto(onDB.getFoto());
-		perfil.setAcesso(onDB.getAcesso());
-		perfil.setUltAcesso(onDB.getUltAcesso());
-		
-		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-		MultipartFile multipartFile = multipartRequest.getFile("image");
-		
-		byte[] conteudo = multipartFile.getBytes();
-		
-		if(multipartFile != null && conteudo != null && conteudo.length > 1)
-		{
-			try
+		try{
+			Perfil onDB = perfilDao.getPerfilPorId(perfil.getId());
+			perfil.setFoto(onDB.getFoto());
+			perfil.setAcesso(onDB.getAcesso());
+			perfil.setUltAcesso(onDB.getUltAcesso());
+			
+			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+			MultipartFile multipartFile = multipartRequest.getFile("image");
+			
+			byte[] conteudo = multipartFile.getBytes();
+			
+			if(multipartFile != null && conteudo != null && conteudo.length > 1)
 			{
-				byte[] image = multipartFile.getBytes();
-				
-				perfil.setFoto(image);
+				try
+				{
+					byte[] image = multipartFile.getBytes();
+					
+					perfil.setFoto(image);
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+				}
 			}
-			catch(Exception e)
+			
+			mensagem = perfilDao.alteraPerfil(perfil);
+			if(Mensagem.contemOk(mensagem))
 			{
-				e.printStackTrace();
+				Log log = new Log();
+				log.setAcao(mensagem);
+				log.setData(null);
+				logsDao.adiciona(log);
 			}
+			session.setAttribute("usuario", perfil);
+			
+			return "redirect:gerenciarPerfil";
+		}catch(Exception e){
+			e.printStackTrace();
+			return "erro/banco";
 		}
-		
-		mensagem = perfilDao.alteraPerfil(perfil);
-		if(Mensagem.contemOk(mensagem))
-		{
-			Log log = new Log();
-			log.setAcao(mensagem);
-			log.setData(null);
-			logsDao.adiciona(log);
-		}
-		session.setAttribute("usuario", perfil);
-		
-		return "redirect:gerenciarPerfil";
 	}
 	
 	/**
