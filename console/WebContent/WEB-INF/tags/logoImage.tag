@@ -17,7 +17,6 @@
 				$('#logoimage').attr('src','resources/images/logo/Logo-300x100.png');
 			}
 			
-			
 			$('#logoimage').height(height);
 			$('#logoimage').width(width);
 		}
