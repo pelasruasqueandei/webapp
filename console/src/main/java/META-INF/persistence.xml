@@ -11,10 +11,10 @@
    <provider>org.hibernate.ejb.HibernatePersistence</provider>
 
    <!-- entidade mapaeada -->
-   <class>br.com.compliancesoftware.model.Perfil</class>
-   <class>br.com.compliancesoftware.model.Alerta</class>
-   <class>br.com.compliancesoftware.model.Log</class>
-   <class>br.com.compliancesoftware.model.PontoTuristico</class>
+   <class>br.com.compliancesoftware.console.model.Perfil</class>
+   <class>br.com.compliancesoftware.console.model.Alerta</class>
+   <class>br.com.compliancesoftware.console.model.Log</class>
+   <class>br.com.compliancesoftware.console.model.PontoTuristico</class>
    
    <properties>
   	<!-- property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" /-->

@@ -47,7 +47,7 @@
   <tx:annotation-driven/>
   
   <mvc:interceptors>
-  	<bean class="br.com.compliancesoftware.interceptor.AutorizadorInterceptor">
+  	<bean class="br.com.compliancesoftware.console.interceptor.AutorizadorInterceptor">
   	</bean>
   </mvc:interceptors>
   
