@@ -10,8 +10,8 @@
 			var largura = $(window).width();
 			if(largura < 840){
 				$('#logoimage').attr('src','resources/images/logo/Icone-454x454.png');
-				height = 50;
-				width = 50;
+				height = 68;
+				width = 68;
 			}
 			else{
 				$('#logoimage').attr('src','resources/images/logo/Logo-300x100.png');

@@ -23,7 +23,28 @@
     <div class="col-md-4 col-md-offset-4">
       <div class="panel">
       	<div class="panel-heading center-block">
-            <mtag:logoImage/>
+            <img id="logoimage" class="center-block" src="<c:url value="/resources/images/logo/Logo-300x100.png" />" alt="Console Logo">
+			<script type="text/javascript">
+				$(document).ready(function(){
+					function resize(){
+						var height = 58;
+						var width = 300;
+						
+						var windowwidth = $(window).width();
+						if(windowwidth < 350){
+							width = 250;
+						}
+						
+						$('#logoimage').height(height);
+						$('#logoimage').width(width);
+					}
+					resize();
+					
+					$( window ).resize(function() {
+						resize();
+					});
+				});
+			</script>
         </div>
         <div class="panel-body">
         	<form class="form-group" method="post" action="entrar">
