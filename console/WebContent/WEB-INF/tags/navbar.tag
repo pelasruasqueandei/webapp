@@ -35,6 +35,8 @@
             	<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                 	Dashboard<span class="caret white"></span></a>
           		<ul class="dropdown-menu" role="menu">
+          			<li><a href="cadastrarPonto">Cadastrar Ponto Turístico</a></li>
+          			<li class="divider"></li>
             		<li><a href="#ucad">Usuários cadastrados no mês</a></li>
             		<li><a href="#pad">Pontos adicionados por mês</a></li>
             		<li><a href="#pat">Pontos atualizados por mês</a></li>
@@ -61,7 +63,7 @@
                  <mtag:loginIcon src="mostraFoto?id=${uid}"/></a>
             <ul class="dropdown-menu" role="menu">
               <li><a href="gerenciarPerfil"><span class="glyphicon glyphicon-user"></span> Gerenciar perfil</a></li>
-                    <li class="divider"></li>
+              <li class="divider"></li>
               <li><a href="logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
             </li>

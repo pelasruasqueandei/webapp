@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import br.com.compliancesoftware.console.control.dao.AlertasDao;
 import br.com.compliancesoftware.console.control.dao.LogsDao;
 import br.com.compliancesoftware.console.control.dao.PerfilDao;
+import br.com.compliancesoftware.console.control.dao.PontosDao;
 import br.com.compliancesoftware.console.model.Perfil;
 import br.com.compliancesoftware.console.model.PontoTuristico;
 
@@ -39,6 +40,10 @@ private static String mensagem = null;
 	@Qualifier("alertasJPA")
 	@Autowired
 	private AlertasDao alertasDao;
+	
+	@Qualifier("pontosJPA")
+	@Autowired
+	private PontosDao pontosDao;
 	
 	/**
 	 * Abre página de cadastramentro de ponto turístico
@@ -74,18 +79,20 @@ private static String mensagem = null;
 	 * @return
 	 */
 	@RequestMapping("cadastraPonto")
-	public String cadastraPonto(PontoTuristico ponto, HttpServletRequest request){
+	public String cadastraPonto(PontoTuristico ponto, Model model, HttpServletRequest request){
 		try{
 			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest)request;
 			MultipartFile imagem = multipartRequest.getFile("image");
 			byte[] conteudo = imagem.getBytes();
 			if(imagem != null && conteudo != null && conteudo.length > 1)
 				ponto.setFoto(conteudo);
-			//else
-				//ponto.setFoto();
+			else
+				ponto.setFoto();
 			
-			//TODO terminar esquema de persistencia de pontos turisticos
-			return null;
+			mensagem = pontosDao.adiciona(ponto);
+			model.addAttribute("mensagem",mensagem);
+			mensagem = null;
+			return "redirect:home";
 			
 		}catch(Exception e){
 			e.printStackTrace();
