@@ -52,10 +52,10 @@ public class PontoTuristico {
 	@Column(name = "cep", nullable = false)
 	private String cep;
 
-	@Column(name = "historia", nullable = false)
+	@Column(name = "historia", length = 15000000,nullable = false)
 	private String historia;
 	
-	@Column(name = "foto", length= 15000000, nullable = false)
+	@Column(name = "foto", length = 15000000, nullable = false)
 	private byte[] foto;
 
 	//Setters e getters

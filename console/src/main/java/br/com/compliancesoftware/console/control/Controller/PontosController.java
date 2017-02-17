@@ -103,7 +103,26 @@ private static String mensagem = null;
 			
 		}catch(Exception e){
 			e.printStackTrace();
-			return "banco/erro";
+			return "erro/banco";
+		}
+	}
+	
+	/**
+	 * Remove um ponto do mapa
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("removerPonto")
+	public String removerPonto(Long id){
+		try{
+			mensagem = pontosDao.remove(id);
+			SystemController.setMsg(mensagem);
+			mensagem = null;
+			return "redirect:home";
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			return "erro/banco";
 		}
 	}
 	

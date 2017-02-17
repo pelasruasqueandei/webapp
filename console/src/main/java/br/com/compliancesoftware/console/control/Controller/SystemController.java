@@ -80,24 +80,46 @@ public class SystemController
 						for(PontoTuristico ponto : lista){
 							long id = ponto.getId();
 							String nome = ponto.getNome();
+							String latitude = ponto.getLatitude();
+							String longitude = ponto.getLongitude();
 							
 							script += "		var marker"+id+" = new google.maps.Marker({                                                                                                                  "+
-									"			position: {lat: latitude, lng: longitude},                                                                                                           "+
+									"			position: {lat: "+latitude+", lng: "+longitude+"},                                                                                                           "+
 									"			map: map,                                                                                                                                            "+
 									"			draggable: false                                                                                                                                     "+
-									"		});                                                                                                                                                      "+
-									"		                                                                                                                                                         "+
+									"		});                        "+
+									"                                                                                                                              "+
 									"		marker"+id+".addListener('click', function() {                                                                                                                 "+
 									"			var infowindow"+id+" = new google.maps.InfoWindow({                                                                                                      "+
-									"				content: \"<div><h4>"+nome+"</h4><br><a href='removerPonto?id="+id+"'>Remover</a></div>\"                                                                             "+
+									"				content: '<div><h4>"+nome+"</h4><br><a href=\"#\" data-toggle=\"modal\" data-target=\"#myModal"+id+"\">Remover</a></div>'								"+
 									"			});                                                                                                                                                  "+
 									"			infowindow"+id+".open(map, marker"+id+");                                                                                                              "+
-									"		});                                                                                                                                                      ";
+									"		});";
 						}
 				
-						script += "	}                                                                                                                                                            "+
+						script += "	}"+
 						"  </script>                                                                                                                                                     "+
 						"  <script async defer src=\"https://maps.googleapis.com/maps/api/js?key=AIzaSyCNgo7zFt-FiFjZtuPzhuDz7VUu87kIFhU&callback=initMap\" charset=\"utf-8\"></script>  ";
+						for(PontoTuristico ponto : lista){
+							long id = ponto.getId();
+							script += "                <div id=\"myModal"+id+"\" class=\"modal fade\" role=\"dialog\">                            "+
+							"   	<div class=\"modal-dialog\">                                                                                "+
+							"   		<div class=\"modal-content\">                                                                           "+
+							"   			<div class=\"modal-header\">                                                                        "+
+							"   				<button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>                 "+
+							"   				<h4 class=\"modal-title\">Tem certeza?</h4>                                                     "+
+							"   			</div>                                                                                              "+
+							"   			<div class=\"modal-body\">                                                                          "+
+							"   				<p>Deseja realmente remover este Ponto Turístico?</p>                                                 "+
+							"   			</div>                                                                                              "+
+							"   			<div class=\"modal-footer\">                                                                        "+
+							"   				<a href=\"removerPonto?id="+id+"\"><button class=\"btn btn-info\">Sim</button></a>   "+
+							"   			</div>                                                                                              "+
+							"   		</div>                                                                                                  "+
+							"   	</div>                                                                                                      "+
+							"</div>"+
+							"                                                                                                            ";
+						}
 				model.addAttribute("script",script);
 			}
 			
