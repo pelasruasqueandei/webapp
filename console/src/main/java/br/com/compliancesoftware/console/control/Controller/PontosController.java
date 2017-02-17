@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -98,7 +97,7 @@ private static String mensagem = null;
 				ponto.setFoto();
 			
 			mensagem = pontosDao.adiciona(ponto);
-			model.addAttribute("mensagem",mensagem);
+			SystemController.setMsg(mensagem);
 			mensagem = null;
 			return "redirect:home";
 			
@@ -112,7 +111,7 @@ private static String mensagem = null;
 	 * Retorna um JSon com os pontos cadastrados no banco
 	 * @param response
 	 */
-	@RequestMapping(value="getPontos",method={RequestMethod.GET})
+	@RequestMapping(value="getPontos")
 	public void getPontos(String type, HttpServletResponse response){
 		try{
 			List<PontoTuristico> lista = pontosDao.lista();

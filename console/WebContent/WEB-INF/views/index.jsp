@@ -42,31 +42,6 @@
 </div>
 
 <mtag:cssJsFoot/>
-
-<script type="text/javascript" charset="utf-8">
-	var markersurl = "localhost:8081/console/getPontos?type=json";
-	//var markersurl = "http://www.pelasruasqueandeiapp.com.br/console/getPontos?type=json"; TODO continuar
-	
-  	var map;
-	var marker;
-	var myPos = {lat: -8.063206513853977, lng: -34.87147623345186};
-	
-	function initMap() {
-		map = new google.maps.Map(document.getElementById('map2'), {
-			center: myPos,
-			zoom: 13
-		});
-
-		marker = new google.maps.Marker({
-			position: myPos,
-			map: map,
-			draggable: false
-		});
-		
-		
-	}
-  </script>
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNgo7zFt-FiFjZtuPzhuDz7VUu87kIFhU&callback=initMap" charset="utf-8"></script>
-
+	${script}
 </body>
 </html>
