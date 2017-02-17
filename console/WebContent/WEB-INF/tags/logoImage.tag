@@ -18,6 +18,21 @@
 			$("#map").width(width - 15);
 		}
 		
+		function resizemap2(){
+			var height = $(window).height()*0.85;
+			var width = $(window).width();
+			
+			if(width > 1000)
+				width = width * 0.95;
+			else
+				width = width * 0.8;
+			
+			$("#mapcontainer2").height(height);
+			$("#mapcontainer2").width(width);
+			$("#map2").height(height);
+			$("#map2").width(width);
+		}
+		
 		function resize(){
 			var height = 58;
 			var width = 300;
@@ -35,12 +50,15 @@
 			$('#logoimage').height(height);
 			$('#logoimage').width(width);
 		}
+		
 		resize();
 		resizemap();
+		resizemap2();
 		
 		$( window ).resize(function() {
 			resize();
 			resizemap();
+			resizemap2();
 		});
 	});
 </script>

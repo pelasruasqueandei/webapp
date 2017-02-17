@@ -1,7 +1,10 @@
 package br.com.compliancesoftware.console.control.jpa;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
@@ -58,6 +61,29 @@ public class PontosJPA implements PontosDao{
 			e.printStackTrace();
 			return Mensagem.getErro("Erro ao tentar remover o Ponto Turístico.(falha interna)");
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<PontoTuristico> lista() {
+		Query q = manager.createQuery("select pt from PontoTuristico as pt");
+		return q.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<PontoTuristico> listaMonumentos() {
+		Query q = manager.createQuery("select pt from PontoTuristico as pt where pt.tipo = :tipo");
+		q.setParameter("tipo", "Monumento");
+		return q.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<PontoTuristico> listaLocais() {
+		Query q = manager.createQuery("select pt from PontoTuristico as pt where pt.tipo = :tipo");
+		q.setParameter("tipo", "Local");
+		return q.getResultList();
 	}
 
 }

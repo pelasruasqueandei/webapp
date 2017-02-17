@@ -20,10 +20,7 @@
 <!-- body -->
 <div id="corpo" class="container-fluid nav-padded">
   <div class="row">
-  	<div id="mapcontainer" class="col-md-6">
-  		<div id="map" class="container"></div>
-  	</div>
-	<div class="col-md-6">
+  	<div class="col-md-6">
     	<div class="row">
             <div id="form" class="panel panel-default nav-padded">
                 <mtag:mensagem msg="${mensagem}"/>
@@ -33,13 +30,13 @@
             	<div class="panel-body">
                 	<div class="row">
                         <form class="form-group" method="post" action="cadastraPonto" enctype="multipart/form-data">
-                       	    <div class="col-md-6">
+                        	<div class="col-md-6">
                            	    <div class="fileupload">
                                     <mtag:loginImage src=""/>
                                     <input type="file" id="foto" name="image">
                                 </div>
                             </div>
-                 		    <div class="col-md-6">
+                       	    <div class="col-md-6">
                         	    <br>
                         	    Nome:
                             	<input name="nome" type="text" class="form-control" placeholder="Nome" required autofocus>
@@ -66,7 +63,7 @@
 								<input id="estado" name="estado" type="text" class="form-control" required>
 								<hr>
 								História:
-								<textarea rows="5" cols="5" class="form-control" placeholder="História" required></textarea>
+								<textarea name="historia" rows="5" cols="5" class="form-control" placeholder="História" required></textarea>
                             	<br>
                             	<button class="btn-block btn-white form-control info" type="submit">Cadastrar</button>
                            </div>
@@ -77,6 +74,9 @@
 			<mtag:footerHtml/>
         </div>
     </div>
+    <div id="mapcontainer" class="col-md-6">
+  		<div id="map" class="container"></div>
+  	</div>
   </div>
 </div>
 <!-- /body -->

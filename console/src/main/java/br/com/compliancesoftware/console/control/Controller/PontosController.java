@@ -1,6 +1,10 @@
 package br.com.compliancesoftware.console.control.Controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +13,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver;
 
 import br.com.compliancesoftware.console.control.dao.AlertasDao;
 import br.com.compliancesoftware.console.control.dao.LogsDao;
@@ -97,6 +105,38 @@ private static String mensagem = null;
 		}catch(Exception e){
 			e.printStackTrace();
 			return "banco/erro";
+		}
+	}
+	
+	/**
+	 * Retorna um JSon com os pontos cadastrados no banco
+	 * @param response
+	 */
+	@RequestMapping(value="getPontos",method={RequestMethod.GET})
+	public void getPontos(String type, HttpServletResponse response){
+		try{
+			List<PontoTuristico> lista = pontosDao.lista();
+			if(lista != null && lista.size() > 0){
+				ArrayList<PontoTuristico> listaPontos = new ArrayList<PontoTuristico>();
+				listaPontos.addAll(lista);
+				XStream xstream = null;
+				
+				if(type.equals("json")){
+					xstream = new XStream(new JettisonMappedXmlDriver());
+				}
+				else{
+					xstream = new XStream();
+				}
+				
+				xstream.setMode(XStream.NO_REFERENCES);
+				xstream.alias("PontoTuristico", PontoTuristico.class);
+				String json = xstream.toXML(listaPontos);
+				response.getWriter().print(json);
+				response.getWriter().close();
+			}
+		}
+		catch(Exception e){
+			e.printStackTrace();
 		}
 	}
 	
