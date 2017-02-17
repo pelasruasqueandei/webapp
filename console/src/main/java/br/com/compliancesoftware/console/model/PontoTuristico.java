@@ -55,7 +55,7 @@ public class PontoTuristico {
 	@Column(name = "historia", nullable = false)
 	private String historia;
 	
-	@Column(name = "foto", nullable = false)
+	@Column(name = "foto", length= 15000000, nullable = false)
 	private byte[] foto;
 
 	//Setters e getters

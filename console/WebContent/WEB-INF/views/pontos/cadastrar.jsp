@@ -55,15 +55,15 @@
                             	Endereço:
                             	<input id="endereco" name="endereco" type="text" class="form-control" placeholder="Endereço" required>
                             	CEP:
-								<input id="cep" name="cep" type="text" class="form-control" placeholder="digite o cep para pesquisa ou escolha o seu local no mapa">
+								<input id="cep" name="cep" type="text" class="form-control" placeholder="digite o cep para pesquisa ou escolha o seu local no mapa" required>
 								Número:
-								<input id="numero" name="numero" type="text" class="form-control">
+								<input id="numero" name="numero" type="text" class="form-control" required>
 								Bairro:
-								<input id="bairro" name="bairro" type="text" class="form-control" readonly>
+								<input id="bairro" name="bairro" type="text" class="form-control" required>
 								Cidade:
-								<input id="cidade" name="cidade" type="text" class="form-control" readonly>
+								<input id="cidade" name="cidade" type="text" class="form-control" required>
 								Estado:
-								<input id="estado" name="estado" type="text" class="form-control" readonly>
+								<input id="estado" name="estado" type="text" class="form-control" required>
 								<hr>
 								História:
 								<textarea rows="5" cols="5" class="form-control" placeholder="História" required></textarea>
@@ -84,17 +84,15 @@
 
 <mtag:carregaImagem/>
 
-
 <script type="text/javascript" charset="utf-8">
-  
-	var map;
+  	var map;
 	var marker;
-	var myPos = {lat: -8.063148088614222, lng: -34.87112754627992};
+	var myPos = {lat: -8.063206513853977, lng: -34.87147623345186};
 	
 	function initMap() {
 		map = new google.maps.Map(document.getElementById('map'), {
-		center: myPos,
-		zoom: 18
+			center: myPos,
+			zoom: 18
 		});
 
 		marker = new google.maps.Marker({
@@ -138,43 +136,19 @@
 			newPosition(position);
 		}
 		
-		function carregaNosCampos(position){
-			var pos = ""+position;
-			pos = pos.replace("(","");
-			pos = pos.replace(")","");
-			var service = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+pos+"&key=AIzaSyCNgo7zFt-FiFjZtuPzhuDz7VUu87kIFhU&result_type=street_address";
-			$.getJSON(service, function(dados) {
-				
-                if (!("erro" in dados)) {
-					var numero = dados.results[0].address_components[0].long_name;
-					var len = dados.results[0].address_components.length;
-					len = len - 1;
-					var cep = dados.results[0].address_components[len].long_name;
-					cep = cep.replace("-","");
-					$("#cep").val(cep);
-					$("#numero").val(numero);
-					
-					$("#cep").blur();
-					repos(position);
-                } //end if.
-                else {
-                    alert("Não foi possível localizar o endereço: "+dados.status);
-                }
-            });
-		}
-			
 		marker.addListener('mouseover', function(e){
 			toggleBounceOn(marker);
 		});
+	
 		marker.addListener('mouseout', function(e){
 			toggleBounceOff(marker);
 		});
+	
 		marker.addListener('dragend', function(e){
 			var position = e.latLng;
 			newPosition(position);
 			carregaNosCampos(position);
 		});
-
 	}
 	
 	$("#endereco").change(function(){
@@ -184,7 +158,47 @@
 		carregaNoMapa(map,marker,endereco,bairro,numero);
 	});
 	
+	function carregaNoMapa(map, marker, endereco, bairro, numero){
+		$.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address="+endereco+","+numero+","+bairro+"&key=AIzaSyCNgo7zFt-FiFjZtuPzhuDz7VUu87kIFhU&result_type=street_address", function(dados) {
+			if (!("erro" in dados)) {
+				var lat = dados.results[0].geometry.location.lat;
+				var lng = dados.results[0].geometry.location.lng;
+				var latlng = new google.maps.LatLng(lat, lng);
+				marker.setPosition(latlng);
+				map.panTo(latlng);
+				map.setCenter(latlng);
+			} //end if.
+			else {
+				alert("Impossível localizar no mapa.");
+			}
+		});
+	}
+	
+	function carregaNosCampos(position){
+		var pos = ""+position;
+		pos = pos.replace("(","");
+		pos = pos.replace(")","");
+		var service = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+pos+"&key=AIzaSyCNgo7zFt-FiFjZtuPzhuDz7VUu87kIFhU&result_type=street_address";
+		$.getJSON(service, function(dados) {
+			if (!("erro" in dados)) {
+				var numero = dados.results[0].address_components[0].long_name;
+				var len = dados.results[0].address_components.length;
+				len = len - 1;
+				var cep = dados.results[0].address_components[len].long_name;
+				cep = cep.replace("-","");
+				$("#cep").val(cep);
+				$("#numero").val(numero);
+			
+				$("#cep").blur();
+				repos(position);
+			} //end if.
+        	else {
+        		alert("Não foi possível localizar o endereço: "+dados.status);
+        	}
+		});
+	}
   </script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNgo7zFt-FiFjZtuPzhuDz7VUu87kIFhU&callback=initMap" charset="utf-8"></script>
+  <mtag:buscaCep/>
 </body>
 </html>
