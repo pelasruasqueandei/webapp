@@ -16,9 +16,17 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		converteData();
+		imprimeHojeComoString();
 	}
 
+	/**
+	 * Imprime a data de hoje, no formato desejado, no console
+	 */
+	private static void imprimeHojeComoString(){
+		String data = FMT.getHojeAsString(DateFormat.DMYHM);
+		System.out.println(data);
+	}
+	
 	/**
 	 * Método que converte uma String em Calendar
 	 */

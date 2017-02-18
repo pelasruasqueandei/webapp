@@ -5,6 +5,7 @@ package br.com.compliancesoftware.console.model.auxModels;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.TimeZone;
 
 /**
  * Ajuda a formatar e parsear datas
@@ -40,6 +41,7 @@ public class FMT
 	{
 		try
 		{
+			TimeZone.setDefault(TimeZone.getTimeZone("America/Argentina/Buenos_Aires"));
 			SimpleDateFormat fmt = new SimpleDateFormat(format.toString());
 			Calendar date = Calendar.getInstance();
 			date.setTime(fmt.parse(data));
@@ -61,6 +63,7 @@ public class FMT
 	{
 		try
 		{
+			TimeZone.setDefault(TimeZone.getTimeZone("America/Argentina/Buenos_Aires"));
 			SimpleDateFormat fmt = new SimpleDateFormat(format.toString());
 			String date = fmt.format(calendar.getTime());
 			return date;
@@ -80,6 +83,7 @@ public class FMT
 	{
 		try
 		{
+			TimeZone.setDefault(TimeZone.getTimeZone("America/Argentina/Buenos_Aires"));
 			Calendar hoje = Calendar.getInstance();
 			hoje.setTimeInMillis(System.currentTimeMillis());
 			SimpleDateFormat fmt = new SimpleDateFormat(format.toString());
@@ -101,6 +105,7 @@ public class FMT
 	{
 		try
 		{
+			TimeZone.setDefault(TimeZone.getTimeZone("America/Argentina/Buenos_Aires"));
 			Calendar hoje = Calendar.getInstance();
 			hoje.setTimeInMillis(System.currentTimeMillis());
 			String zerada = getStringFromCalendar(hoje, DateFormat.DMY);
@@ -120,6 +125,7 @@ public class FMT
 	 */
 	public static Calendar getAgora() {
 		try {
+			TimeZone.setDefault(TimeZone.getTimeZone("America/Argentina/Buenos_Aires"));
 			Calendar hoje = Calendar.getInstance();
 			hoje.setTimeInMillis(System.currentTimeMillis());
 			return hoje;
