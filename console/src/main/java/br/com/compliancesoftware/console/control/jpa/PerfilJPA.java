@@ -162,5 +162,19 @@ public class PerfilJPA implements PerfilDao
 			manager.persist(adm);
 		}
 	}
+
+	/* (non-Javadoc)
+	 * @see br.com.compliancesoftware.console.control.dao.PerfilDao#getPrimeiroPerfil()
+	 */
+	@Override
+	public Perfil getPrimeiroPerfil() {
+		List<Perfil> lista = lista();
+		if(lista != null && lista.size() > 0){
+			Perfil perfil = lista.get(0);
+			return perfil;
+		}
+		else
+			return null;
+	}
 	
 }

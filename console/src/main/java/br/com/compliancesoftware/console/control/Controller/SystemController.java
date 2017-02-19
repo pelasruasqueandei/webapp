@@ -12,10 +12,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.compliancesoftware.console.control.dao.AlertasDao;
+import br.com.compliancesoftware.console.control.dao.LogsDao;
 import br.com.compliancesoftware.console.control.dao.PerfilDao;
 import br.com.compliancesoftware.console.control.dao.PontosDao;
+import br.com.compliancesoftware.console.model.Log;
 import br.com.compliancesoftware.console.model.Perfil;
 import br.com.compliancesoftware.console.model.PontoTuristico;
+import br.com.compliancesoftware.console.model.auxModels.EnviaEmail;
+import br.com.compliancesoftware.console.model.auxModels.FMT;
+import br.com.compliancesoftware.console.model.auxModels.Mensagem;
 
 /**
  * Controlador de requisições do site(projeto).
@@ -37,6 +42,10 @@ public class SystemController
 	@Qualifier("pontosJPA")
 	@Autowired
 	private PontosDao pontosDao;
+	
+	@Qualifier("logsJPA")
+	@Autowired
+	private LogsDao logsDao;
 	
 	private static String mensagem = null;
 	
@@ -141,4 +150,41 @@ public class SystemController
 	{
 		return "redirect:home";
 	}
+	
+	@RequestMapping("esqueciSenha")
+	public String esqueciSenha(){
+		Perfil perfil = perfilDao.getPrimeiroPerfil();
+		if(perfil != null){
+			String email = perfil.getEmail();
+			
+			String range = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$";
+			String senha = "$";
+			
+			for(int i = 0;i < 11;i++){
+				int index = (int)(Math.random()*12);
+				String elemento = ""+range.charAt(index);
+				senha += elemento;
+			}
+			
+			perfil.setSenha(senha);
+			perfilDao.alteraPerfil(perfil);
+			
+			String msg = EnviaEmail.envia(email, "[Pelas Ruas Que Andei] Troca de senha.", "Sua nova senha de acesso ao sistema é: "+senha);
+			LoginController.setMsg(msg);
+			
+			if(Mensagem.contemOk(msg)){
+				Log log = new Log();
+				log.setAcao("Troca de senha pelo link");
+				log.setData(FMT.getAgora());
+				logsDao.adiciona(log);
+			}
+			
+			return "redirect:login";
+		}
+		else{
+			LoginController.setMsg(Mensagem.getErro("E-mail não enviado, contate o T.I."));
+			return "redirect:login";
+		}
+	}
+	
 }

@@ -15,7 +15,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter
 		  Perfil usuario = (Perfil)request.getSession().getAttribute("usuario");
 	      String uri = request.getRequestURI();
 	      
-	      if(uri.contains("getPontos")||uri.endsWith("login")||uri.endsWith("entrar")||uri.contains("resources")||uri.contains("tags/")||uri.contains("erro")) {
+	      if(uri.endsWith("esqueciSenha")||uri.contains("getPontos")||uri.endsWith("login")||uri.endsWith("entrar")||uri.contains("resources")||uri.contains("tags/")||uri.contains("erro")) {
 	    	  return true;
 	      }
 

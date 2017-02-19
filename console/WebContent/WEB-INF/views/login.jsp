@@ -53,6 +53,7 @@
                 <input name="senha" type="password" class="form-control" placeholder="Senha" required>
                 <button class="btn-block btn-white form-control info" type="submit">Entrar</button>
             </form>
+            <mtag:modalbox bodymessage="Enviar senha por e-mail?" titlemessage="Esqueceu sua senha?" footeractiontext="Sim" linktext="Esqueci minha senha" footeractionhref="esqueciSenha" id="m1"/>
         </div>
       </div>
     </div>

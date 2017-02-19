@@ -55,7 +55,7 @@ public class EnviaEmail
 
 			Transport.send(message);
 			
-			return "<strong>OK!</strong> E-mail enviado!";
+			return "<strong>Ok!</strong> E-mail enviado!";
 		}
 		catch(Exception e)
 		{

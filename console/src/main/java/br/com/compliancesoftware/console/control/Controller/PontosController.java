@@ -23,8 +23,11 @@ import br.com.compliancesoftware.console.control.dao.AlertasDao;
 import br.com.compliancesoftware.console.control.dao.LogsDao;
 import br.com.compliancesoftware.console.control.dao.PerfilDao;
 import br.com.compliancesoftware.console.control.dao.PontosDao;
+import br.com.compliancesoftware.console.model.Log;
 import br.com.compliancesoftware.console.model.Perfil;
 import br.com.compliancesoftware.console.model.PontoTuristico;
+import br.com.compliancesoftware.console.model.auxModels.FMT;
+import br.com.compliancesoftware.console.model.auxModels.Mensagem;
 
 /**
  * Controlador de views e requisições de pontos turísticos
@@ -98,6 +101,14 @@ private static String mensagem = null;
 			
 			mensagem = pontosDao.adiciona(ponto);
 			SystemController.setMsg(mensagem);
+			
+			if(Mensagem.contemOk(mensagem)){
+				Log log = new Log();
+				log.setAcao(mensagem);
+				log.setData(FMT.getAgora());
+				logsDao.adiciona(log);
+			}
+			
 			mensagem = null;
 			return "redirect:home";
 			
@@ -117,6 +128,14 @@ private static String mensagem = null;
 		try{
 			mensagem = pontosDao.remove(id);
 			SystemController.setMsg(mensagem);
+			
+			if(Mensagem.contemOk(mensagem)){
+				Log log = new Log();
+				log.setAcao(mensagem);
+				log.setData(FMT.getAgora());
+				logsDao.adiciona(log);
+			}
+			
 			mensagem = null;
 			return "redirect:home";
 		}
