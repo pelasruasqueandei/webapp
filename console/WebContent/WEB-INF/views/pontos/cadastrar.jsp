@@ -31,6 +31,7 @@
                 	<div class="row">
                         <form class="form-group" method="post" action="cadastraPonto" enctype="multipart/form-data">
                         	<div class="col-md-6">
+                        		Foto:
                            	    <div class="fileupload">
                                     <mtag:loginImage src=""/>
                                     <input type="file" id="foto" name="image">
@@ -98,7 +99,7 @@
 		marker = new google.maps.Marker({
 			position: myPos,
 			map: map,
-			draggable: true,
+			draggable: false,
 			animation: google.maps.Animation.DROP
 		});
 		
@@ -121,18 +122,10 @@
 			$("#latitude").val(latlng[0]);
 			$("#longitude").val(latlng[1]);
 		}
-  
-		function drop() {
-			for (var i = 0; i < markerArray.length; i++) {
-				setTimeout(function() {
-				addMarkerMethod();
-				}, i * 200);
-			}
-		}
 		
 		function repos(position){
 			marker.setPosition(position);
-			map.setCenter(position);
+			//map.setCenter(position);
 			newPosition(position);
 		}
 		
@@ -146,6 +139,13 @@
 	
 		marker.addListener('dragend', function(e){
 			var position = e.latLng;
+			newPosition(position);
+			carregaNosCampos(position);
+		});
+		
+		map.addListener('bounds_changed', function(e){
+			var position = map.getCenter();
+			marker.setPosition(position);
 			newPosition(position);
 			carregaNosCampos(position);
 		});
@@ -182,14 +182,24 @@
 		$.getJSON(service, function(dados) {
 			if (!("erro" in dados)) {
 				var numero = dados.results[0].address_components[0].long_name;
+				var endereco = dados.results[0].address_components[1].long_name;
+				var bairro = dados.results[0].address_components[2].long_name;
+				var cidade = dados.results[0].address_components[3].long_name;
+				var estado = dados.results[0].address_components[5].long_name;
+				
 				var len = dados.results[0].address_components.length;
 				len = len - 1;
 				var cep = dados.results[0].address_components[len].long_name;
 				cep = cep.replace("-","");
+				
 				$("#cep").val(cep);
+				$("#endereco").val(endereco);
+				$("#bairro").val(bairro);
+				$("#cidade").val(cidade);
+				$("#estado").val(estado);
 				$("#numero").val(numero);
 			
-				$("#cep").blur();
+				//$("#cep").blur();
 				repos(position);
 			} //end if.
         	else {

@@ -10,7 +10,7 @@
 
 <mtag:favicon/>
 
-<title>Console Gerenciador de Dados</title>
+<title>Console Gerenciador de Pontos Turísticos</title>
 
 <mtag:cssJsHead/>
 

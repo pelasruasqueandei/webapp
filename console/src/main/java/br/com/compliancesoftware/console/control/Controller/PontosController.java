@@ -27,6 +27,7 @@ import br.com.compliancesoftware.console.model.Log;
 import br.com.compliancesoftware.console.model.Perfil;
 import br.com.compliancesoftware.console.model.PontoTuristico;
 import br.com.compliancesoftware.console.model.auxModels.FMT;
+import br.com.compliancesoftware.console.model.auxModels.Hunter;
 import br.com.compliancesoftware.console.model.auxModels.Mensagem;
 
 /**
@@ -168,6 +169,9 @@ private static String mensagem = null;
 				xstream.setMode(XStream.NO_REFERENCES);
 				xstream.alias("PontoTuristico", PontoTuristico.class);
 				String json = xstream.toXML(listaPontos);
+				
+				json = Hunter.hunt(json);
+				
 				response.getWriter().print(json);
 				response.getWriter().close();
 			}

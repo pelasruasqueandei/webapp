@@ -39,19 +39,17 @@ $(document).ready(function() {
                                 $("#bairro").val(dados.bairro);
                                 $("#cidade").val(dados.localidade);
                                 $("#estado").val(dados.uf);
-								$("#endereco").change();
+                                $("#endereco").change();
                             } //end if.
                             else {
                                 //CEP pesquisado não foi encontrado.
                                 limpa_formulario_cep();
-                                alert("CEP não encontrado.");
                             }
                         });
                     } //end if.
                     else {
                         //cep é inválido.
                         limpa_formulario_cep();
-                        alert("Formato de CEP inválido.");
                     }
                 } //end if.
                 else {
