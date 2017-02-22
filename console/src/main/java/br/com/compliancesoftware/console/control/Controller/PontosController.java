@@ -17,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver;
 
 import br.com.compliancesoftware.console.control.dao.AlertasDao;
 import br.com.compliancesoftware.console.control.dao.LogsDao;
@@ -27,7 +26,6 @@ import br.com.compliancesoftware.console.model.Log;
 import br.com.compliancesoftware.console.model.Perfil;
 import br.com.compliancesoftware.console.model.PontoTuristico;
 import br.com.compliancesoftware.console.model.auxModels.FMT;
-import br.com.compliancesoftware.console.model.auxModels.Hunter;
 import br.com.compliancesoftware.console.model.auxModels.Mensagem;
 
 /**
@@ -151,28 +149,20 @@ private static String mensagem = null;
 	 * @param response
 	 */
 	@RequestMapping(value="getPontos")
-	public void getPontos(String type, HttpServletResponse response){
+	public void getPontos(HttpServletResponse response){
 		try{
 			List<PontoTuristico> lista = pontosDao.lista();
 			if(lista != null && lista.size() > 0){
 				ArrayList<PontoTuristico> listaPontos = new ArrayList<PontoTuristico>();
 				listaPontos.addAll(lista);
 				XStream xstream = null;
-				
-				if(type.equals("json")){
-					xstream = new XStream(new JettisonMappedXmlDriver());
-				}
-				else{
-					xstream = new XStream();
-				}
+				xstream = new XStream();
 				
 				xstream.setMode(XStream.NO_REFERENCES);
 				xstream.alias("PontoTuristico", PontoTuristico.class);
-				String json = xstream.toXML(listaPontos);
+				String xml = xstream.toXML(listaPontos);
 				
-				json = Hunter.hunt(json);
-				
-				response.getWriter().print(json);
+				response.getWriter().print(xml);
 				response.getWriter().close();
 			}
 		}
