@@ -118,6 +118,72 @@ private static String mensagem = null;
 	}
 	
 	/**
+	 * Abre página de atualização de ponto turístico
+	 * @param model
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("atualizarPonto")
+	public String atualizarPonto(Long id, Model model, HttpSession session) {
+		try{
+			int qtdAlertas = alertasDao.conta();
+			model.addAttribute("qtdAlertas", qtdAlertas);
+			
+			if(mensagem != null) {
+				model.addAttribute("mensagem", mensagem);
+				mensagem = null;
+			}
+			
+			Perfil usuario = (Perfil)session.getAttribute("usuario");
+			model.addAttribute("usuario",usuario);
+			
+			PontoTuristico ponto = pontosDao.getPorId(id);
+			model.addAttribute("ponto",ponto);
+			
+			return "pontos/atualizar";
+		}catch(Exception e){
+			e.printStackTrace();
+			return "erro/banco";
+		}
+	}
+	
+	/**
+	 * Atualiza um ponto turístico no mapa.
+	 * @param ponto
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("atualizaPonto")
+	public String atualizaPonto(PontoTuristico ponto, Model model, HttpServletRequest request){
+		try{
+			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest)request;
+			MultipartFile imagem = multipartRequest.getFile("image");
+			byte[] conteudo = imagem.getBytes();
+			if(imagem != null && conteudo != null && conteudo.length > 1)
+				ponto.setFoto(conteudo);
+			else
+				ponto.setFoto();
+			
+			mensagem = pontosDao.atualiza(ponto);
+			SystemController.setMsg(mensagem);
+			
+			if(Mensagem.contemOk(mensagem)){
+				Log log = new Log();
+				log.setAcao(mensagem);
+				log.setData(FMT.getAgora());
+				logsDao.adiciona(log);
+			}
+			
+			mensagem = null;
+			return "redirect:home";
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			return "erro/banco";
+		}
+	}
+	
+	/**
 	 * Remove um ponto do mapa
 	 * @param id
 	 * @return
@@ -145,10 +211,31 @@ private static String mensagem = null;
 	}
 	
 	/**
+	 * Passa a imagem do ponto em questão através de stream da response.
+	 * @param id
+	 * @param response
+	 */
+	@RequestMapping("imagemPonto")
+	public void mostraFoto(Long id, HttpServletResponse response){
+		try{
+			PontoTuristico ponto = pontosDao.getPorId(id);
+			byte[] foto = ponto.getFoto();
+			if(foto != null)
+			{
+				response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
+				response.getOutputStream().write(foto);
+				response.getOutputStream().close();
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	/**
 	 * Retorna um JSon com os pontos cadastrados no banco
 	 * @param response
 	 */
-	@RequestMapping(value="getPontos")
+	@RequestMapping("getPontos")
 	public void getPontos(HttpServletResponse response){
 		try{
 			List<PontoTuristico> lista = pontosDao.lista();

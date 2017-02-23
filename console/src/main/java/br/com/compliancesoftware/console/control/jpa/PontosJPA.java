@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import br.com.compliancesoftware.console.control.dao.PontosDao;
 import br.com.compliancesoftware.console.model.PontoTuristico;
+import br.com.compliancesoftware.console.model.auxModels.FMT;
 import br.com.compliancesoftware.console.model.auxModels.Mensagem;
 
 /**
@@ -30,6 +31,7 @@ public class PontosJPA implements PontosDao{
 	@Override
 	public String adiciona(PontoTuristico ponto) {
 		if(ponto != null){
+			ponto.setAtualizacao(FMT.getAgora());
 			manager.persist(ponto);
 			return Mensagem.getOk("Ponto turístico cadastrado.");
 		}
@@ -40,6 +42,7 @@ public class PontosJPA implements PontosDao{
 	@Override
 	public String atualiza(PontoTuristico ponto) {
 		if(ponto != null){
+			ponto.setAtualizacao(FMT.getAgora());
 			manager.merge(ponto);
 			return Mensagem.getOk("Ponto turístico atualizado.");
 		}

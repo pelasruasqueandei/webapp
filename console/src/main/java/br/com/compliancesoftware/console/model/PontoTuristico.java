@@ -1,13 +1,20 @@
 package br.com.compliancesoftware.console.model;
 
+import java.util.Calendar;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
+
+import br.com.compliancesoftware.console.model.auxModels.FMT;
+import br.com.compliancesoftware.console.model.auxModels.FMT.DateFormat;
 
 /**
  * Forma de representar um pono turistico no mapa.
@@ -54,6 +61,13 @@ public class PontoTuristico {
 
 	@Column(name = "historia", length = 15000000,nullable = false)
 	private String historia;
+	
+	@Column(name = "horario", nullable = false)
+	private String horario;
+
+	@Column(name = "atualizacao", nullable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Calendar atualizacao;
 	
 	@Column(name = "foto", length = 15000000, nullable = false)
 	private byte[] foto;
@@ -179,5 +193,25 @@ public class PontoTuristico {
 
 	public void setCep(String cep) {
 		this.cep = cep;
+	}
+	
+	public String getHorario() {
+		return horario;
+	}
+
+	public void setHorario(String horario) {
+		this.horario = horario;
+	}
+
+	public Calendar getAtualizacao() {
+		return atualizacao;
+	}
+
+	public String getFmtAtualizacao() {
+		return FMT.getStringFromCalendar(atualizacao, DateFormat.DMYHM);
+	}
+	
+	public void setAtualizacao(Calendar atualizacao) {
+		this.atualizacao = atualizacao;
 	}
 }

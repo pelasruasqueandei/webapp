@@ -91,6 +91,7 @@ public class SystemController
 							String nome = ponto.getNome();
 							String latitude = ponto.getLatitude();
 							String longitude = ponto.getLongitude();
+							String atualizacao = ponto.getFmtAtualizacao();
 							
 							script += "		var marker"+id+" = new google.maps.Marker({                                                                                                                  "+
 									"			position: {lat: "+latitude+", lng: "+longitude+"},                                                                                                           "+
@@ -100,7 +101,7 @@ public class SystemController
 									"                                                                                                                              "+
 									"		marker"+id+".addListener('click', function() {                                                                                                                 "+
 									"			var infowindow"+id+" = new google.maps.InfoWindow({                                                                                                      "+
-									"				content: '<div><h4>"+nome+"</h4><br><a href=\"#\" data-toggle=\"modal\" data-target=\"#myModal"+id+"\">Remover</a></div>'								"+
+									"				content: '<div><h4>"+nome+"</h4><br>Atualizado em: "+atualizacao+"<br><a href=\"atualizarPonto?id="+id+"\">Atualizar</a><br><a href=\"#\" data-toggle=\"modal\" data-target=\"#myModal"+id+"\">Remover</a></div>'								"+
 									"			});                                                                                                                                                  "+
 									"			infowindow"+id+".open(map, marker"+id+");                                                                                                              "+
 									"		});";
