@@ -72,6 +72,9 @@ public class LoginController
 				log.setData(null);
 				logsDao.adiciona(log);
 				
+				SystemController.setMsg(mensagem);
+				mensagem = null;
+				
 				return "redirect:home";
 			}
 			else {

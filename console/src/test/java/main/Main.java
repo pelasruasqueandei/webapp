@@ -4,6 +4,7 @@ import java.util.Calendar;
 
 import br.com.compliancesoftware.console.model.auxModels.FMT;
 import br.com.compliancesoftware.console.model.auxModels.FMT.DateFormat;
+import br.com.compliancesoftware.console.model.auxModels.Hunter;
 
 /**
  * expõe saidas no console do eclipse para testes visuais.
@@ -16,9 +17,18 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		imprimeHojeComoString();
+		String frase = "Texto bastante grande para ser encriptado e mostrado em seu tamanho encriptado!";
+		System.out.println("Frase: "+frase+"\nTamanho: "+frase.length());
+		
+		String cripted = encripta(frase);
+		System.out.println("\nFrase encriptada: "+cripted+"\nTamanho: "+cripted.length());
 	}
 
+	private static String encripta(String frase){
+		String hunt = Hunter.hunt(frase);
+		return hunt;
+	}
+	
 	/**
 	 * Imprime a data de hoje, no formato desejado, no console
 	 */

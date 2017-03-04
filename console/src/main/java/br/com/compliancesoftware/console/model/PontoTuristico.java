@@ -59,12 +59,114 @@ public class PontoTuristico {
 	@Column(name = "cep", nullable = false)
 	private String cep;
 
-	@Column(name = "historia", length = 15000000,nullable = false)
+	@Column(name = "historia", length = 8000,nullable = false)
 	private String historia;
 	
-	@Column(name = "horario", nullable = false)
-	private String horario;
+	@Column(name = "funciona_segunda", nullable = false)
+	private boolean funcSegunda;
+	
+	@Column(name = "horario_segunda_inicio", nullable = false)
+	private String horarioSegundaInicio;
+	
+	@Column(name = "horario_segunda_intervalo_in", nullable = false)
+	private String horarioSegundaIntervaloIn;
 
+	@Column(name = "horario_segunda_intervalo_out", nullable = false)
+	private String horarioSegundaIntervaloOut;
+	
+	@Column(name = "horario_segunda_fim", nullable = false)
+	private String horarioSegundaFim;
+	
+	@Column(name = "funciona_terca", nullable = false)
+	private boolean funcTerca;
+	
+	@Column(name = "horario_terca_inicio", nullable = false)
+	private String horarioTercaInicio;
+	
+	@Column(name = "horario_terca_intervalo_in", nullable = false)
+	private String horarioTercaIntervaloIn;
+
+	@Column(name = "horario_terca_intervalo_out", nullable = false)
+	private String horarioTercaIntervaloOut;
+	
+	@Column(name = "horario_terca_fim", nullable = false)
+	private String horarioTercaFim;
+	
+	@Column(name = "funciona_quarta", nullable = false)
+	private boolean funcQuarta;
+	
+	@Column(name = "horario_quarta_inicio", nullable = false)
+	private String horarioQuartaInicio;
+	
+	@Column(name = "horario_quarta_intervalo_in", nullable = false)
+	private String horarioQuartaIntervaloIn;
+
+	@Column(name = "horario_quarta_intervalo_out", nullable = false)
+	private String horarioQuartaIntervaloOut;
+	
+	@Column(name = "horario_quarta_fim", nullable = false)
+	private String horarioQuartaFim;
+	
+	@Column(name = "funciona_quinta", nullable = false)
+	private boolean funcQuinta;
+	
+	@Column(name = "horario_quinta_inicio", nullable = false)
+	private String horarioQuintaInicio;
+	
+	@Column(name = "horario_quinta_intervalo_in", nullable = false)
+	private String horarioQuintaIntervaloIn;
+
+	@Column(name = "horario_quinta_intervalo_out", nullable = false)
+	private String horarioQuintaIntervaloOut;
+	
+	@Column(name = "horario_quinta_fim", nullable = false)
+	private String horarioQuintaFim;
+	
+	@Column(name = "funciona_sexta", nullable = false)
+	private boolean funcSexta;
+	
+	@Column(name = "horario_sexta_inicio", nullable = false)
+	private String horarioSextaInicio;
+	
+	@Column(name = "horario_sexta_intervalo_in", nullable = false)
+	private String horarioSextaIntervaloIn;
+
+	@Column(name = "horario_sexta_intervalo_out", nullable = false)
+	private String horarioSextaIntervaloOut;
+	
+	@Column(name = "horario_sexta_fim", nullable = false)
+	private String horarioSextaFim;
+	
+	@Column(name = "funciona_sabado", nullable = false)
+	private boolean funcSabado;
+	
+	@Column(name = "horario_sabado_inicio", nullable = false)
+	private String horarioSabadoInicio;
+	
+	@Column(name = "horario_sabado_intervalo_in", nullable = false)
+	private String horarioSabadoIntervaloIn;
+
+	@Column(name = "horario_sabado_intervalo_out", nullable = false)
+	private String horarioSabadoIntervaloOut;
+	
+	@Column(name = "horario_sabado_fim", nullable = false)
+	private String horarioSabadoFim;
+	
+	@Column(name = "funciona_domingo", nullable = false)
+	private boolean funcDomingo;
+	
+	@Column(name = "horario_domingo_inicio", nullable = false)
+	private String horarioDomingoInicio;
+	
+	@Column(name = "horario_domingo_intervalo_in", nullable = false)
+	private String horarioDomingoIntervaloIn;
+
+	@Column(name = "horario_domingo_intervalo_out", nullable = false)
+	private String horarioDomingoIntervaloOut;
+	
+	@Column(name = "horario_domingo_fim", nullable = false)
+	private String horarioDomingoFim;
+	
 	@Column(name = "atualizacao", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar atualizacao;
@@ -194,13 +296,285 @@ public class PontoTuristico {
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
-	
-	public String getHorario() {
-		return horario;
+
+	public boolean getFuncSegunda() {
+		return funcSegunda;
 	}
 
-	public void setHorario(String horario) {
-		this.horario = horario;
+	public void setFuncSegunda(boolean funcSegunda) {
+		this.funcSegunda = funcSegunda;
+	}
+
+	public String getHorarioSegundaInicio() {
+		return horarioSegundaInicio;
+	}
+
+	public void setHorarioSegundaInicio(String horarioSegundaInicio) {
+		this.horarioSegundaInicio = horarioSegundaInicio;
+	}
+
+	public String getHorarioSegundaIntervaloIn() {
+		return horarioSegundaIntervaloIn;
+	}
+
+	public void setHorarioSegundaIntervaloIn(String horarioSegundaIntervaloIn) {
+		this.horarioSegundaIntervaloIn = horarioSegundaIntervaloIn;
+	}
+
+	public String getHorarioSegundaIntervaloOut() {
+		return horarioSegundaIntervaloOut;
+	}
+
+	public void setHorarioSegundaIntervaloOut(String horarioSegundaIntervaloOut) {
+		this.horarioSegundaIntervaloOut = horarioSegundaIntervaloOut;
+	}
+
+	public String getHorarioSegundaFim() {
+		return horarioSegundaFim;
+	}
+
+	public void setHorarioSegundaFim(String horarioSegundaFim) {
+		this.horarioSegundaFim = horarioSegundaFim;
+	}
+
+	public boolean getFuncTerca() {
+		return funcTerca;
+	}
+
+	public void setFuncTerca(boolean funcTerca) {
+		this.funcTerca = funcTerca;
+	}
+
+	public String getHorarioTercaInicio() {
+		return horarioTercaInicio;
+	}
+
+	public void setHorarioTercaInicio(String horarioTercaInicio) {
+		this.horarioTercaInicio = horarioTercaInicio;
+	}
+
+	public String getHorarioTercaIntervaloIn() {
+		return horarioTercaIntervaloIn;
+	}
+
+	public void setHorarioTercaIntervaloIn(String horarioTercaIntervaloIn) {
+		this.horarioTercaIntervaloIn = horarioTercaIntervaloIn;
+	}
+
+	public String getHorarioTercaIntervaloOut() {
+		return horarioTercaIntervaloOut;
+	}
+
+	public void setHorarioTercaIntervaloOut(String horarioTercaIntervaloOut) {
+		this.horarioTercaIntervaloOut = horarioTercaIntervaloOut;
+	}
+
+	public String getHorarioTercaFim() {
+		return horarioTercaFim;
+	}
+
+	public void setHorarioTercaFim(String horarioTercaFim) {
+		this.horarioTercaFim = horarioTercaFim;
+	}
+
+	public boolean getFuncQuarta() {
+		return funcQuarta;
+	}
+
+	public void setFuncQuarta(boolean funcQuarta) {
+		this.funcQuarta = funcQuarta;
+	}
+
+	public String getHorarioQuartaInicio() {
+		return horarioQuartaInicio;
+	}
+
+	public void setHorarioQuartaInicio(String horarioQuartaInicio) {
+		this.horarioQuartaInicio = horarioQuartaInicio;
+	}
+
+	public String getHorarioQuartaIntervaloIn() {
+		return horarioQuartaIntervaloIn;
+	}
+
+	public void setHorarioQuartaIntervaloIn(String horarioQuartaIntervaloIn) {
+		this.horarioQuartaIntervaloIn = horarioQuartaIntervaloIn;
+	}
+
+	public String getHorarioQuartaIntervaloOut() {
+		return horarioQuartaIntervaloOut;
+	}
+
+	public void setHorarioQuartaIntervaloOut(String horarioQuartaIntervaloOut) {
+		this.horarioQuartaIntervaloOut = horarioQuartaIntervaloOut;
+	}
+
+	public String getHorarioQuartaFim() {
+		return horarioQuartaFim;
+	}
+
+	public void setHorarioQuartaFim(String horarioQuartaFim) {
+		this.horarioQuartaFim = horarioQuartaFim;
+	}
+
+	public boolean getFuncQuinta() {
+		return funcQuinta;
+	}
+
+	public void setFuncQuinta(boolean funcQuinta) {
+		this.funcQuinta = funcQuinta;
+	}
+
+	public String getHorarioQuintaInicio() {
+		return horarioQuintaInicio;
+	}
+
+	public void setHorarioQuintaInicio(String horarioQuintaInicio) {
+		this.horarioQuintaInicio = horarioQuintaInicio;
+	}
+
+	public String getHorarioQuintaIntervaloIn() {
+		return horarioQuintaIntervaloIn;
+	}
+
+	public void setHorarioQuintaIntervaloIn(String horarioQuintaIntervaloIn) {
+		this.horarioQuintaIntervaloIn = horarioQuintaIntervaloIn;
+	}
+
+	public String getHorarioQuintaIntervaloOut() {
+		return horarioQuintaIntervaloOut;
+	}
+
+	public void setHorarioQuintaIntervaloOut(String horarioQuintaIntervaloOut) {
+		this.horarioQuintaIntervaloOut = horarioQuintaIntervaloOut;
+	}
+
+	public String getHorarioQuintaFim() {
+		return horarioQuintaFim;
+	}
+
+	public void setHorarioQuintaFim(String horarioQuintaFim) {
+		this.horarioQuintaFim = horarioQuintaFim;
+	}
+
+	public boolean getFuncSexta() {
+		return funcSexta;
+	}
+
+	public void setFuncSexta(boolean funcSexta) {
+		this.funcSexta = funcSexta;
+	}
+
+	public String getHorarioSextaInicio() {
+		return horarioSextaInicio;
+	}
+
+	public void setHorarioSextaInicio(String horarioSextaInicio) {
+		this.horarioSextaInicio = horarioSextaInicio;
+	}
+
+	public String getHorarioSextaIntervaloIn() {
+		return horarioSextaIntervaloIn;
+	}
+
+	public void setHorarioSextaIntervaloIn(String horarioSextaIntervaloIn) {
+		this.horarioSextaIntervaloIn = horarioSextaIntervaloIn;
+	}
+
+	public String getHorarioSextaIntervaloOut() {
+		return horarioSextaIntervaloOut;
+	}
+
+	public void setHorarioSextaIntervaloOut(String horarioSextaIntervaloOut) {
+		this.horarioSextaIntervaloOut = horarioSextaIntervaloOut;
+	}
+
+	public String getHorarioSextaFim() {
+		return horarioSextaFim;
+	}
+
+	public void setHorarioSextaFim(String horarioSextaFim) {
+		this.horarioSextaFim = horarioSextaFim;
+	}
+
+	public boolean getFuncSabado() {
+		return funcSabado;
+	}
+
+	public void setFuncSabado(boolean funcSabado) {
+		this.funcSabado = funcSabado;
+	}
+
+	public String getHorarioSabadoInicio() {
+		return horarioSabadoInicio;
+	}
+
+	public void setHorarioSabadoInicio(String horarioSabadoInicio) {
+		this.horarioSabadoInicio = horarioSabadoInicio;
+	}
+
+	public String getHorarioSabadoIntervaloIn() {
+		return horarioSabadoIntervaloIn;
+	}
+
+	public void setHorarioSabadoIntervaloIn(String horarioSabadoIntervaloIn) {
+		this.horarioSabadoIntervaloIn = horarioSabadoIntervaloIn;
+	}
+
+	public String getHorarioSabadoIntervaloOut() {
+		return horarioSabadoIntervaloOut;
+	}
+
+	public void setHorarioSabadoIntervaloOut(String horarioSabadoIntervaloOut) {
+		this.horarioSabadoIntervaloOut = horarioSabadoIntervaloOut;
+	}
+
+	public String getHorarioSabadoFim() {
+		return horarioSabadoFim;
+	}
+
+	public void setHorarioSabadoFim(String horarioSabadoFim) {
+		this.horarioSabadoFim = horarioSabadoFim;
+	}
+
+	public boolean getFuncDomingo() {
+		return funcDomingo;
+	}
+
+	public void setFuncDomingo(boolean funcDomingo) {
+		this.funcDomingo = funcDomingo;
+	}
+
+	public String getHorarioDomingoInicio() {
+		return horarioDomingoInicio;
+	}
+
+	public void setHorarioDomingoInicio(String horarioDomingoInicio) {
+		this.horarioDomingoInicio = horarioDomingoInicio;
+	}
+
+	public String getHorarioDomingoIntervaloIn() {
+		return horarioDomingoIntervaloIn;
+	}
+
+	public void setHorarioDomingoIntervaloIn(String horarioDomingoIntervaloIn) {
+		this.horarioDomingoIntervaloIn = horarioDomingoIntervaloIn;
+	}
+
+	public String getHorarioDomingoIntervaloOut() {
+		return horarioDomingoIntervaloOut;
+	}
+
+	public void setHorarioDomingoIntervaloOut(String horarioDomingoIntervaloOut) {
+		this.horarioDomingoIntervaloOut = horarioDomingoIntervaloOut;
+	}
+
+	public String getHorarioDomingoFim() {
+		return horarioDomingoFim;
+	}
+
+	public void setHorarioDomingoFim(String horarioDomingoFim) {
+		this.horarioDomingoFim = horarioDomingoFim;
 	}
 
 	public Calendar getAtualizacao() {

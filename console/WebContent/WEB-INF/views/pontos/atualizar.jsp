@@ -36,6 +36,188 @@
                                     <mtag:loginImage src="imagemPonto?id=${ponto.id}"/>
                                     <input type="file" id="foto" name="image">
                                 </div>
+                                <hr>
+                                Horário de Funcionamento:
+                                <hr>
+                                <ul class="nav nav-tabs">
+                                	<li><a href="#panel-segunda" class="active" data-toggle="tab">Seg</a></li>
+                                	<li><a href="#panel-terca" data-toggle="tab">Ter</a></li>
+                                	<li><a href="#panel-quarta" data-toggle="tab">Qua</a></li>
+                                	<li><a href="#panel-quinta" data-toggle="tab">Qui</a></li>
+                                	<li><a href="#panel-sexta" data-toggle="tab">Sex</a></li>
+                                	<li><a href="#panel-sabado" data-toggle="tab">Sab</a></li>
+                                	<li><a href="#panel-domingo" data-toggle="tab">Dom</a></li>
+                                </ul>
+                                <div class="tab-content">
+                                	<div id="panel-segunda" class="tab-pane fade in active">
+                                		<div>
+                                			<c:if test="${ponto.funcSegunda eq true}">
+                                				<input name="funcSegunda" type="checkbox" checked/>Funciona na Segunda
+                                			</c:if>
+                                			<c:if test="${ponto.funcSegunda eq false}">
+                                				<input name="funcSegunda" type="checkbox"/>Funciona na Segunda
+                                			</c:if>
+                                			<br>
+                                			Início:
+                                			<br>
+                                			<input name="horarioSegundaInicio" class="form-control" type="time" value="${ponto.horarioSegundaInicio}"/>
+                                			<br>
+                                			Intervalo:
+                                			<br>
+                                			<input name="horarioSegundaIntervaloIn" class="form-control" type="time" value="${ponto.horarioSegundaIntervaloIn}"/>
+                                			<br>às<br>
+                                			<input name="horarioSegundaIntervaloOut" class="form-control" type="time" value="${ponto.horarioSegundaIntervaloOut}"/>
+                                			<br>
+                                			Fim:
+                                			<br>
+                                			<input name="horarioSegundaFim" class="form-control" type="time"  value="${ponto.horarioSegundaFim}"/>
+                                		</div>
+                                	</div>
+                                	<div id="panel-terca" class="tab-pane fade">
+                                		<div>
+                                			<c:if test="${ponto.funcTerca eq true}">
+                                				<input name="funcTerca" type="checkbox" checked/>Funciona na Terça
+                                			</c:if>
+                                			<c:if test="${ponto.funcTerca eq false}">
+                                				<input name="funcTerca" type="checkbox"/>Funciona na Terça
+                                			</c:if>
+                                			<br>
+                                			Início:
+                                			<br>
+                                			<input name="horarioTercaInicio" class="form-control" type="time"/>
+                                			<br>
+                                			Intervalo:
+                                			<br>
+                                			<input name="horarioTercaIntervaloIn" class="form-control" type="time"/>
+                                			<br>às<br>
+                                			<input name="horarioTercaIntervaloOut" class="form-control" type="time"/>
+                                			<br>
+                                			Fim:
+                                			<br>
+                                			<input name="horarioTercaFim" class="form-control" type="time"/>
+                                		</div>
+                                	</div>
+                                	<div id="panel-quarta" class="tab-pane fade">
+                                		<div>
+                                			<c:if test="${ponto.funcQuarta eq true}">
+                                				<input name="funcQuarta" type="checkbox" checked/>Funciona na Quarta
+                                			</c:if>
+                                			<c:if test="${ponto.funcQuarta eq false}">
+                                				<input name="funcQuarta" type="checkbox"/>Funciona na Quarta
+                                			</c:if>
+                                			<br>
+                                			Início:
+                                			<br>
+                                			<input name="horarioQuartaInicio" class="form-control" type="time"/>
+                                			<br>
+                                			Intervalo:
+                                			<br>
+                                			<input name="horarioQuartaIntervaloIn" class="form-control" type="time"/>
+                                			<br>às<br>
+                                			<input name="horarioQuartaIntervaloOut" class="form-control" type="time"/>
+                                			<br>
+                                			Fim:
+                                			<br>
+                                			<input name="horarioQuartaFim" class="form-control" type="time"/>
+                                		</div>
+                                	</div>
+                                	<div id="panel-quinta" class="tab-pane fade">
+                                		<div>
+                                			<c:if test="${ponto.funcQuinta eq true}">
+                                				<input name="funcQuinta" type="checkbox" checked/>Funciona na Quinta
+                                			</c:if>
+                                			<c:if test="${ponto.funcQuinta eq false}">
+                                				<input name="funcQuinta" type="checkbox"/>Funciona na Quinta
+                                			</c:if>
+                                			<br>
+                                			Início:
+                                			<br>
+                                			<input name="horarioQuintaInicio" class="form-control" type="time"/>
+                                			<br>
+                                			Intervalo:
+                                			<br>
+                                			<input name="horarioQuintaIntervaloIn" class="form-control" type="time"/>
+                                			<br>às<br>
+                                			<input name="horarioQuintaIntervaloOut" class="form-control" type="time"/>
+                                			<br>
+                                			Fim:
+                                			<br>
+                                			<input name="horarioQuintaFim" class="form-control" type="time"/>
+                                		</div>
+                                	</div>
+                                	<div id="panel-sexta" class="tab-pane fade">
+                                		<div>
+                                			<c:if test="${ponto.funcSexta eq true}">
+                                				<input name="funcSexta" type="checkbox" checked/>Funciona na Sexta
+                                			</c:if>
+                                			<c:if test="${ponto.funcSexta eq false}">
+                                				<input name="funcSexta" type="checkbox"/>Funciona na Sexta
+                                			</c:if>
+                                			<br>
+                                			Início:
+                                			<br>
+                                			<input name="horarioSextaInicio" class="form-control" type="time"/>
+                                			<br>
+                                			Intervalo:
+                                			<br>
+                                			<input name="horarioSextaIntervaloIn" class="form-control" type="time"/>
+                                			<br>às<br>
+                                			<input name="horarioSextaIntervaloOut" class="form-control" type="time"/>
+                                			<br>
+                                			Fim:
+                                			<br>
+                                			<input name="horarioSextaFim" class="form-control" type="time"/>
+                                		</div>
+                                	</div>
+                                	<div id="panel-sabado" class="tab-pane fade">
+                                		<div>
+                                			<c:if test="${ponto.funcSabado eq true}">
+                                				<input name="funcSabado" type="checkbox" checked/>Funciona na Sabado
+                                			</c:if>
+                                			<c:if test="${ponto.funcSabado eq false}">
+                                				<input name="funcSabado" type="checkbox"/>Funciona na Sabado
+                                			</c:if>
+                                			<br>
+                                			Início:
+                                			<br>
+                                			<input name="horarioSabadoInicio" class="form-control" type="time"/>
+                                			<br>
+                                			Intervalo:
+                                			<br>
+                                			<input name="horarioSabadoIntervaloIn" class="form-control" type="time"/>
+                                			<br>às<br>
+                                			<input name="horarioSabadoIntervaloOut" class="form-control" type="time"/>
+                                			<br>
+                                			Fim:
+                                			<br>
+                                			<input name="horarioSabadoFim" class="form-control" type="time"/>
+                                		</div>
+                                	</div>
+                                	<div id="panel-domingo" class="tab-pane fade">
+                                		<div>
+                                			<c:if test="${ponto.funcDomingo eq true}">
+                                				<input name="funcDomingo" type="checkbox" checked/>Funciona na Domingo
+                                			</c:if>
+                                			<c:if test="${ponto.funcDomingo eq false}">
+                                				<input name="funcDomingo" type="checkbox"/>Funciona na Domingo
+                                			</c:if>
+                                			<br>
+                                			Início:
+                                			<br>
+                                			<input name="horarioDomingoInicio" class="form-control" type="time"/>
+                                			<br>
+                                			Intervalo:
+                                			<br>
+                                			<input name="horarioDomingoIntervaloIn" class="form-control" type="time"/>
+                                			<br>às<br>
+                                			<input name="horarioDomingoIntervaloOut" class="form-control" type="time"/>
+                                			<br>
+                                			Fim:
+                                			<br>
+                                			<input name="horarioDomingoFim" class="form-control" type="time"/>
+                                		</div>
+                                	</div>
+                                </div>
                             </div>
                        	    <div class="col-md-6">
                        	    	<input type="hidden" name="id" value="${ponto.id}">
@@ -205,9 +387,6 @@
 				$("#cidade").val(cidade);
 				$("#estado").val(estado);
 				$("#numero").val(numero);
-			
-				//$("#cep").blur();
-				repos(position);
 			} //end if.
         	else {
         		alert("Não foi possível localizar o endereço: "+dados.status);

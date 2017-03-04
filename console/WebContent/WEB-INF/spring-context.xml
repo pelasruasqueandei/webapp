@@ -27,6 +27,8 @@
     <!-- property name="url" value="jdbc:mysql://localhost/webconsole"/-->
     <property name="driverClassName" value="org.h2.Driver"/>
     <property name="url" value="jdbc:h2:~/h2db/webconsole;MODE=MySQL;MV_STORE=FALSE;AUTO_SERVER=TRUE"/>
+    <!-- property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/-->
+    <!-- property name="url" value="jdbc:sqlserver://localhost:1433;instanceName=DOUGLAS-PC\SQLEXPRESS;databaseName=webconsole;"/-->
     <property name="username" value="root"/>
     <property name="password" value="$9916do@d"/>
   </bean>
