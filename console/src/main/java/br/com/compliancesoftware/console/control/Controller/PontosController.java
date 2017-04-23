@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver;
 
 import br.com.compliancesoftware.console.control.dao.AlertasDao;
 import br.com.compliancesoftware.console.control.dao.LogsDao;
@@ -236,14 +237,17 @@ private static String mensagem = null;
 	 * @param response
 	 */
 	@RequestMapping("getPontos")
-	public void getPontos(HttpServletResponse response){
+	public void getPontos(String ret, HttpServletResponse response){
 		try{
 			List<PontoTuristico> lista = pontosDao.lista();
 			if(lista != null && lista.size() > 0){
 				ArrayList<PontoTuristico> listaPontos = new ArrayList<PontoTuristico>();
 				listaPontos.addAll(lista);
 				XStream xstream = null;
-				xstream = new XStream();
+				if(ret != null && ret.equals("json"))
+					xstream = new XStream(new JettisonMappedXmlDriver());
+				else
+					xstream = new XStream();
 				
 				xstream.setMode(XStream.NO_REFERENCES);
 				xstream.alias("PontoTuristico", PontoTuristico.class);
