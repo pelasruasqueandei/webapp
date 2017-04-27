@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -236,7 +237,7 @@ private static String mensagem = null;
 	 * Retorna um JSon com os pontos cadastrados no banco
 	 * @param response
 	 */
-	@RequestMapping("getPontos")
+	@RequestMapping(value="getPontos", method=RequestMethod.GET, produces={"application/json; charset=UTF-8"})
 	public void getPontos(String ret, HttpServletResponse response){
 		try{
 			List<PontoTuristico> lista = pontosDao.lista();
@@ -252,6 +253,8 @@ private static String mensagem = null;
 				xstream.setMode(XStream.NO_REFERENCES);
 				xstream.alias("PontoTuristico", PontoTuristico.class);
 				String xml = xstream.toXML(listaPontos);
+				
+				response.setCharacterEncoding("UTF-8");
 				
 				response.getWriter().print(xml);
 				response.getWriter().close();
